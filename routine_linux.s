@@ -1,5 +1,5 @@
 .text
-.globl	exchange
+.globl	exchange,stop_routine
 __save:
 	movq    $head, %r9
         movq    (%r9),  	%r8
@@ -24,7 +24,7 @@ __release:
 	movq	40(%r8),	%rdx
 	movq	64(%r8),	%rsi
 	movq	72(%r8),	%rdi
-	jmp	__n1
+	retq
 
 exchange:                              ## @exchange
 	jmp	__save
@@ -35,3 +35,19 @@ __n0:
 	jmp 	__release
 __n1:
 	retq
+
+__save_:
+        movq    $head,		%r9
+        movq    (%r9),          %r8
+        movq    %rax,           16(%r8)
+        movq    %rdx,           40(%r8)
+        jmp     __n0_
+
+stop_routine:
+        jmp     __save_
+__n0_:
+        movq    $head, %rdi
+        movq    $coll, %rsi
+        call    remove
+        jmp     __release
+
