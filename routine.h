@@ -1,11 +1,12 @@
 //----------
-
-
+#include<stdlib.h>
+#define STACK_LEN 1024
+extern void exchange();
+typedef void* any;
 
 typedef unsigned long   code_t;
 typedef unsigned long   data_t;
 typedef unsigned long*  data_p;
-
 
 typedef struct __routine {
     code_t esp;
@@ -22,3 +23,5 @@ typedef struct __routine {
 
 
 void exchange_c(proutine* head,proutine* tail);
+proutine create_routine(any p,proutine next);
+proutine create_empty_routine(proutine next);

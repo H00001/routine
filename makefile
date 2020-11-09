@@ -1,9 +1,11 @@
 CC=gcc
-freebsd: main.c routine_freebsd.s routine.h
-	$(CC) main.c routine_freebsd.s -o freebsd
+base=main.c routine.c routine.h
+freebsd: $(base) routine_freebsd.s
+	$(CC) $^ -o $@
 
-linux: main.c routine_linux.s routine.h
-	$(CC) main.c routine_linux.s -o linux
+linux: $(base) routine_linux.s
+	$(CC) $^ -o $@
 
+.PHONY:clean
 clean:
 	rm *.o freebsd linux
