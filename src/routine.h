@@ -3,36 +3,40 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
+#include<string.h>
 #include "reuse.h"
+
 #define STACK_LEN 1024
+
 extern void exchange();
+
 extern void stop_routine();
+
 typedef void *any;
 
 typedef unsigned long code_t;
 typedef unsigned long data_t;
 typedef unsigned long *data_p;
 typedef unsigned long const *const_data_p;
+typedef int rid_t;
 
-typedef enum _STATUS
-{
-    R,
+typedef enum _STATUS {
+    W = 0,
     Z,
-    T,
+    T = 2,
     S,
     D,
     X,
-    W
+    R
 } STATUS;
 
-typedef struct __u_routine
-{
+typedef struct __u_routine {
+    const int rid;
     const const_data_p conseqence;
-    const STATUS* status;
+    const STATUS *status;
 } uroutine;
 
-typedef struct __routine
-{
+typedef struct __routine {
     code_t esp;
     code_t ebp;
     data_t rdi;
@@ -45,22 +49,35 @@ typedef struct __routine
     data_t rax;
     data_t rbx;
     data_p stack;
-    STATUS status;
+    struct {
+        STATUS status;
+        rid_t rid;
+    };
     struct __routine *next;
 } routine, *proutine;
 
-typedef struct _collect
-{
+typedef struct _collect {
     reuse link;
     data_t length;
     data_p stack;
 } collect, *pcollect;
 
 void exchange_c(proutine *head, proutine *tail);
+
 uroutine create_routine(any p);
-void create_empty_routine();
+
 void set_head_tail(proutine h, proutine t);
+
 data_p acquire_stack0(int len);
-void init_stack(data_p stack, int len, any p);
+
+void init_stack(proutine* r,data_p stack, int len, any p);
+
 uroutine create_routine_with_params(any p, int num, ...);
+
+proutine create_current_routine();
+
+void insert(proutine *n,proutine r);
+
+void remove_from_bitmap(rid_t rid);
 #endif
+
