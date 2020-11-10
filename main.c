@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "routine.h"
 
-
-int add(int a,int b);
-int b(int k) {
+int add(int a, int b);
+int b(int k)
+{
     int i = 0;
     printf("i am function of b, you are succeed\n");
     exchange();
@@ -12,42 +12,44 @@ int b(int k) {
     exchange();
     printf("i am function of d, you are succeed\n");
     i++;
-    printf("%d\n",i);
+    printf("%d\n", i);
     exchange();
     printf("i am function of e, you are succeed\n");
-	printf("tk:%d\n",add(100,200));
+    printf("tk:%d\n", add(100, 200));
     exchange();
     return k;
 }
 
-int add(int a,int b){
-	printf("add\n");
-	int c = a+b;
-	exchange();
-	return c;
+int add(int a, int b)
+{
+    printf("add\n");
+    int c = a + b;
+    exchange();
+    return c;
 }
 
-int main() {
+int main()
+{
     create_current_routine();
-    uroutine e = create_routine(b);
-    uroutine r = create_routine_with_params(b,1,10);
+    uroutine e = create_routine_with_params(add, 2, 3, 5);
+    uroutine r = create_routine_with_params(b, 1, 10);
     exchange();
     exchange();
     exchange();
     exchange();
     exchange();
-        printf("result:%d,starus:%d",*(r.conseqence),*(r.status));
-
-    exchange();
-    exchange();
-    exchange();
-    exchange();
-    exchange();
+    printf("result:%d,starus:%d", *(r.conseqence), *(r.status));
     exchange();
     exchange();
     exchange();
     exchange();
     exchange();
     exchange();
-    printf("result:%d,starus:%d",*(r.conseqence),*(r.status));
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    printf("result:%d,starus:%d\n", *(r.conseqence), *(r.status));
+    printf("result:%d,starus:%d\n", *(e.conseqence), *(e.status));
 }
