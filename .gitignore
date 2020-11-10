@@ -2,3 +2,4 @@ a.out
 cmake-build-debug
 a.out.DSYM
 *.h.gch
+CMakeLists.txt

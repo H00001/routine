@@ -32,15 +32,13 @@ __release:
         movq    80(%r12),       %rbx
         retq
 
-exchange:                              ## @exchange
+exchange:
 	jmp	__save
 __n0:
 	movq    $head, %rdi
         movq    $tail, %rsi
 	call	exchange_c
 	jmp 	__release
-__n1:
-	retq
 
 __save_:
         movq    $head,		%r9
