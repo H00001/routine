@@ -8,8 +8,6 @@
 
 #define STACK_LEN 1024
 
-
-
 typedef void *any;
 
 typedef unsigned long code_t;
@@ -80,7 +78,6 @@ void insert(proutine *n,proutine r);
 void remove_from_bitmap(rid_t rid);
 
 proutine init_routine();
-
 
 #endif
 

@@ -6,6 +6,10 @@ freebsd: $(base) src/routine_freebsd.s
 linux: $(base) src/routine_linux.s
 	$(CC) $^ -o $@
 
+check:
+	
+distcheck:
+
 .PHONY:clean
 clean:
 	rm *.o freebsd linux
