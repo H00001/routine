@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "routine.h"
+#include "src/routine.h"
 
 int add(int a, int b);
 int routine_b(int k)
@@ -42,6 +42,6 @@ int main()
     exchange();
     exchange();
     exchange();
-    printf("routineid:%d result:%lu,status:%d\n",r.rid, *(r.conseqence), *(r.status));
-    printf("routineid:%d result:%lu,status:%d\n",e.rid, *(e.conseqence), *(e.status));
+    printf("routineid:%d result:%lu,status:%d\n",r.rid, *(r.consequence), *(r.status));
+    printf("routineid:%d result:%lu,status:%d\n",e.rid, *(e.consequence), *(e.status));
 }
