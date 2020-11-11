@@ -3,6 +3,7 @@
 void remove(proutine *h, pcollect *c) {
     pcollect t = malloc(sizeof(collect));
     t->stack = (*h)->stack;
+    t->size = (*h)->size;
     if ((*c) != NULL) {
         t->link.next = (pcollect) (*c);
     }
@@ -33,6 +34,7 @@ void init_stack(proutine r, data_p stack, int len, any p) {
     stack[len - 2] = (code_t) p;
     r->esp = (code_t) (stack + STACK_LEN - 2);
     r->ebp = (code_t) (stack + STACK_LEN - 1);
+    r->size = len;
 }
 
 void insert(proutine *n, proutine r) {

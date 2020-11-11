@@ -11,7 +11,9 @@ proutine ROUTINE_NR[1024];
 
 data_p stack_from_collection() {
     data_p s = coll->stack;
+    pcollect pc = coll;
     coll = coll->link.next;
+    free(pc);
     return s;
 }
 

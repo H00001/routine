@@ -15,6 +15,7 @@ typedef unsigned long data_t;
 typedef unsigned long *data_p;
 typedef unsigned long const *const_data_p;
 typedef int rid_t;
+typedef unsigned int s_size_t;
 
 typedef enum _STATUS {
     W = 0,
@@ -50,11 +51,12 @@ typedef struct __routine {
         rid_t rid;
     };
     struct __routine *next;
+    s_size_t size;
 } routine, *proutine;
 
 typedef struct _collect {
     reuse link;
-    data_t length;
+    s_size_t size;
     data_p stack;
 } collect, *pcollect;
 
