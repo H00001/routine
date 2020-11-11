@@ -8,8 +8,6 @@
 
 #define STACK_LEN 1024
 
-
-
 typedef void *any;
 
 typedef unsigned long code_t;
@@ -60,6 +58,7 @@ typedef struct _collect {
     data_p stack;
 } collect, *pcollect;
 
+
 extern void exchange();
 extern void stop_routine();
 
@@ -80,7 +79,6 @@ void insert(proutine *n,proutine r);
 void remove_from_bitmap(rid_t rid);
 
 proutine init_routine();
-
 
 #endif
 
