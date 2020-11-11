@@ -59,3 +59,7 @@ proutine create_current_routine() {
     r->rid = 0;
     return tail = head = r;
 }
+
+void remove_from_bitmap(rid_t rid){
+    ROUTINE_NR[rid] = NULL;
+}

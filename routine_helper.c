@@ -10,6 +10,7 @@ void remove(proutine *h, pcollect *c) {
 
     (*h)->status = T;
     (*h)->stack = NULL;
+    remove_from_bitmap((*h)->rid);
     (*h) = (*h)->next;
 }
 

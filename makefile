@@ -1,5 +1,4 @@
-#CC=gcc --std=gnu17
-CC=clang -std=c11 
+CC=clang -std=gnu11 
 base=main.c routine.c reuse.c routine_helper.c
 freebsd: $(base) routine_freebsd.s
 	$(CC) $^ -o $@ 
@@ -9,4 +8,4 @@ linux: $(base) routine_linux.s
 
 .PHONY:clean
 clean:
-	rm *.o freebsd linux
+	rm *.o $(base)
