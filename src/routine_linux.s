@@ -36,7 +36,7 @@ exchange:
 	jmp	__save
 __n0:
 	movq    $head, %rdi
-        movq    $tail, %rsi
+    movq    $tail, %rsi
 	call	exchange_c
 	jmp 	__release
 
@@ -50,8 +50,6 @@ __save_:
 stop_routine:
         jmp     __save_
 __n0_:
-        movq    $head, %rdi
-        movq    $coll, %rsi
-        call    remove
+        call    remove_0
         jmp     __release
 

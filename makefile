@@ -1,5 +1,5 @@
 CC=clang -std=gnu11 
-base=main_t.c src/routine.c src/reuse.c src/routine_helper.c
+base=main_t.c src/routine_base.c src/reuse.c src/routine_helper.c src/routine_user_api.c
 freebsd: $(base) src/routine_freebsd.s
 	$(CC) $^ -o $@ 
 

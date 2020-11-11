@@ -50,10 +50,6 @@ __save_:
 _stop_routine:                              
         jmp     __save_
 __n0_:
-        movq    _head@GOTPCREL(%rip), %rdi
-        movq    _coll@GOTPCREL(%rip), %rsi
-        movq    _UROUTINE_NR@GOTPCREL(%rip), %rdx
-
-        call    _remove
+        call    _remove_0
         jmp     __release
 
