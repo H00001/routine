@@ -79,5 +79,7 @@ proutine create_current_routine();
 void insert(proutine *n,proutine r);
 
 void remove_from_bitmap(rid_t rid);
+
+proutine init_routine();
 #endif
 

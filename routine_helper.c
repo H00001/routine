@@ -36,6 +36,5 @@ void init_stack(proutine *r, data_p stack, int len, any p) {
 }
 
 void insert(proutine *n, proutine r) {
-    (*n)->next = r;
-    (*n) = r;
+    (*n) = (*n)->next = r;
 }
