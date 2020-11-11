@@ -24,25 +24,30 @@ void set_rid(proutine r) {
     ROUTINE_NR[r->rid = ++curr_pid] = r;
 }
 
+proutine init_routine() {
+    proutine r = malloc(sizeof(routine));
+    memset(r, 0, sizeof(routine));
+    return r;
+}
+
 proutine create_routine0(any p) {
     ROUTINE_NR[0] = create_current_routine();
-    proutine r = malloc(sizeof(routine));
-    memset(r,0,sizeof(routine));
+    proutine r = init_routine();
     set_rid(r);
-    init_stack(&r, acquire_stack0(STACK_LEN), STACK_LEN, p);
+    init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p);
     insert(&tail, r);
     return r;
 }
 
 uroutine create_routine_with_params(any p, int num, ...) {
     SET_RET_U_ROUTINE
-    va_list valist;
-    va_start(valist, num);
+    va_list p_list;
+    va_start(p_list, num);
     data_p w = &(r->rdi);
     for (int i = 0; i < num; i++, w++) {
-        (*w) = va_arg(valist, data_t);
+        (*w) = va_arg(p_list, data_t);
     }
-    va_end(valist);
+    va_end(p_list);
     return u;
 }
 
@@ -52,10 +57,9 @@ uroutine create_routine(any p) {
 }
 
 proutine create_current_routine() {
-    if (ROUTINE_NR[0] != NULL) {
-        return ROUTINE_NR[0];
-    }
-    proutine r = malloc(sizeof(routine));
-    r->rid = 0;
-    return tail = head = r;
+    return ROUTINE_NR[0] != NULL ? ROUTINE_NR[0] : (tail = head = init_routine());
+}
+
+void remove_from_bitmap(rid_t rid) {
+    ROUTINE_NR[rid] = NULL;
 }

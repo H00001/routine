@@ -8,9 +8,7 @@
 
 #define STACK_LEN 1024
 
-extern void exchange();
 
-extern void stop_routine();
 
 typedef void *any;
 
@@ -32,7 +30,7 @@ typedef enum _STATUS {
 
 typedef struct __u_routine {
     const int rid;
-    const const_data_p conseqence;
+    const const_data_p consequence;
     const STATUS *status;
 } uroutine;
 
@@ -62,15 +60,16 @@ typedef struct _collect {
     data_p stack;
 } collect, *pcollect;
 
+extern void exchange();
+extern void stop_routine();
+
 void exchange_c(proutine *head, proutine *tail);
 
 uroutine create_routine(any p);
 
-void set_head_tail(proutine h, proutine t);
-
 data_p acquire_stack0(int len);
 
-void init_stack(proutine* r,data_p stack, int len, any p);
+void init_stack(proutine r,data_p stack, int len, any p);
 
 uroutine create_routine_with_params(any p, int num, ...);
 
@@ -78,4 +77,10 @@ proutine create_current_routine();
 
 void insert(proutine *n,proutine r);
 
+void remove_from_bitmap(rid_t rid);
+
+proutine init_routine();
+
+
 #endif
+
