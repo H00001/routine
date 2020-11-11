@@ -33,6 +33,11 @@ typedef struct __u_routine {
     const STATUS *status;
 } uroutine;
 
+typedef struct _base_stack {
+    data_p stack;
+    s_size_t size;
+} base_stack;
+
 typedef struct __routine {
     code_t esp;
     code_t ebp;
@@ -45,19 +50,17 @@ typedef struct __routine {
     data_t r10;
     data_t rax;
     data_t rbx;
-    data_p stack;
+    base_stack bs;
     struct {
         STATUS status;
         rid_t rid;
     };
     struct __routine *next;
-    s_size_t size;
 } routine, *proutine;
 
 typedef struct _collect {
     reuse link;
-    s_size_t size;
-    data_p stack;
+    base_stack bs;
 } collect, *pcollect;
 
 extern void exchange();
@@ -80,6 +83,8 @@ void insert(proutine *n,proutine r);
 void remove_from_bitmap(rid_t rid);
 
 proutine init_routine();
+
+base_stack stack_from_collection();
 
 #endif
 

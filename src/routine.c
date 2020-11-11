@@ -9,8 +9,8 @@ proutine ROUTINE_NR[1024];
     const uroutine u = {r->rid, &(r->rax), &(r->status)}; \
 
 
-data_p stack_from_collection() {
-    data_p s = coll->stack;
+base_stack stack_from_collection() {
+    base_stack s = coll->bs;
     pcollect pc = coll;
     coll = coll->link.next;
     free(pc);
@@ -18,7 +18,7 @@ data_p stack_from_collection() {
 }
 
 data_p acquire_stack0(int len) {
-    return coll == NULL ? malloc(len * sizeof(data_t)) : stack_from_collection();
+    return coll == NULL ? malloc(len * sizeof(data_t)) : stack_from_collection().stack;
 }
 
 void set_rid(proutine r) {
