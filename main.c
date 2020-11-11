@@ -5,6 +5,7 @@ int add(int a, int b);
 int routine_b(int k)
 {
 	for(int i = 0;i<k;i++){
+
 		exchange();
 		printf("i is :%d\n",i);
 	}
