@@ -36,7 +36,7 @@ _exchange:
 	jmp	__save
 __n0:
 	movq    _head@GOTPCREL(%rip), %rdi
-        movq    _tail@GOTPCREL(%rip), %rsi
+    movq    _tail@GOTPCREL(%rip), %rsi
 	call	_exchange_c
 	jmp 	__release
 
@@ -52,6 +52,8 @@ _stop_routine:
 __n0_:
         movq    _head@GOTPCREL(%rip), %rdi
         movq    _coll@GOTPCREL(%rip), %rsi
+        movq    _UROUTINE_NR@GOTPCREL(%rip), %rdx
+
         call    _remove
         jmp     __release
 

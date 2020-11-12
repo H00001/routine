@@ -23,8 +23,8 @@ int main()
 {
     create_current_routine();
     create_current_routine();
-    uroutine e = create_routine_with_params(routine_add, 2, 3, 5);
-    uroutine r = create_routine_with_params(routine_b, 1, 10);
+    rid_t e = create_routine_with_params(routine_add, 2, 3, 5);
+    rid_t r = create_routine_with_params(routine_b, 1, 10);
     create_routine_with_params(routine_b, 1, 10);
     exchange();
     exchange();
@@ -42,6 +42,6 @@ int main()
     exchange();
     exchange();
     exchange();
-    printf("routineid:%d result:%lu,status:%d\n",r.rid, *(r.consequence), *(r.status));
-    printf("routineid:%d result:%lu,status:%d\n",e.rid, *(e.consequence), *(e.status));
+    printf("routineid:%d result:%lu,status:%d\n",e, get_consequence(e), get_status(e));
+    printf("routineid:%d result:%lu,status:%d\n",r, get_consequence(r), get_status(r));
 }

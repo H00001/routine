@@ -4,9 +4,7 @@ proutine head;
 proutine tail;
 pcollect coll;
 proutine ROUTINE_NR[1024];
-#define SET_RET_U_ROUTINE \
-    proutine r = create_routine0(p); \
-    const uroutine u = {r->rid, &(r->rax), &(r->status)}; \
+uroutine* UROUTINE_NR[1024];
 
 
 base_stack stack_from_collection() {
@@ -41,8 +39,8 @@ proutine create_routine0(any p) {
     return r;
 }
 
-uroutine create_routine_with_params(any p, int num, ...) {
-    SET_RET_U_ROUTINE
+rid_t create_routine_with_params(any p, int num, ...) {
+    proutine r = create_routine0(p);
     va_list p_list;
     va_start(p_list, num);
     data_p w = &(r->rdi);
@@ -50,12 +48,11 @@ uroutine create_routine_with_params(any p, int num, ...) {
         (*w) = va_arg(p_list, data_t);
     }
     va_end(p_list);
-    return u;
+    return r->rid;
 }
 
-uroutine create_routine(any p) {
-    SET_RET_U_ROUTINE
-    return u;
+rid_t create_routine(any p) {
+    return create_routine0(p)->rid;
 }
 
 proutine create_current_routine() {
@@ -64,4 +61,12 @@ proutine create_current_routine() {
 
 void remove_from_bitmap(rid_t rid) {
     ROUTINE_NR[rid] = NULL;
+}
+
+data_t get_consequence(rid_t rid){
+    return UROUTINE_NR[rid]->consequence;
+}
+
+STATUS get_status(rid_t rid){
+    return UROUTINE_NR[rid]->status;
 }

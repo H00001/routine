@@ -16,6 +16,8 @@ typedef unsigned long *data_p;
 typedef unsigned long const *const_data_p;
 typedef int rid_t;
 typedef unsigned int s_size_t;
+typedef data_t (*Fn)();
+typedef int (*Fn1)();
 
 typedef enum _STATUS {
     W = 0,
@@ -28,10 +30,16 @@ typedef enum _STATUS {
 } STATUS;
 
 typedef struct __u_routine {
-    const int rid;
-    const const_data_p consequence;
-    const STATUS *status;
+    rid_t rid;
+    data_t consequence;
+    STATUS status;
 } uroutine;
+
+typedef struct __u_routine1 {
+    rid_t rid;
+    Fn get_consequence;
+    Fn1 get_status;
+} uroutine1;
 
 typedef struct _base_stack {
     data_p stack;
@@ -68,13 +76,13 @@ extern void stop_routine();
 
 void exchange_c(proutine *head, proutine *tail);
 
-uroutine create_routine(any p);
+rid_t create_routine(any p);
 
 data_p acquire_stack0(int len);
 
 void init_stack(proutine r,data_p stack, int len, any p);
 
-uroutine create_routine_with_params(any p, int num, ...);
+rid_t create_routine_with_params(any p, int num, ...);
 
 proutine create_current_routine();
 
@@ -86,5 +94,10 @@ proutine init_routine();
 
 base_stack stack_from_collection();
 
+void remove_from_bitmap(rid_t rid);
+
+data_t get_consequence(rid_t rid);
+
+STATUS get_status(rid_t rid);
 #endif
 

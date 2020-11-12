@@ -1,7 +1,8 @@
 #include "routine.h"
 
-void remove(proutine *h, pcollect *c) {
+void remove(proutine *h, pcollect *c,uroutine** u) {
     pcollect t = malloc(sizeof(collect));
+    uroutine* u1 = malloc(sizeof(uroutine));
     t->bs = (*h)->bs;
 
     if ((*c) != NULL) {
@@ -9,9 +10,14 @@ void remove(proutine *h, pcollect *c) {
     }
     (*c) = t;
 
-    (*h)->status = T;
+    u1->consequence = (*h)->rax;
+    u1->status = T;
+    u[u1->rid=(*h)->rid]=u1;
     remove_from_bitmap((*h)->rid);
+
+    proutine lh = (*h);
     (*h) = (*h)->next;
+    free(lh);
 }
 
 void exchange_c(proutine *h, proutine *t) {
