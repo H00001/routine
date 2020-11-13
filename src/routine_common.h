@@ -8,6 +8,7 @@
 #define STACK_LEN 1024
 #define ROUTINE_SUM 0xFFFF
 #include "stdlib.h"
+#include "routine_dfa.h"
 typedef void *any;
 
 typedef unsigned long code_t;
@@ -16,17 +17,6 @@ typedef unsigned long *data_p;
 typedef unsigned long const *const_data_p;
 typedef int rid_t;
 typedef unsigned int s_size_t;
-
-typedef enum _STATUS {
-    W = 0,
-    Z,
-    T = 2,
-    S,
-    D,
-    X,
-    R,
-    UB
-} STATUS;
 
 typedef struct __u_routine {
     rid_t rid;

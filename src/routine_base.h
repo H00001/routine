@@ -20,7 +20,7 @@ static proutine create_current_routine();
 
 static void remove_from_routine_list(rid_t rid);
 
-base_stack stack_from_collection();
+static data_p stack_from_collection();
 
 void remove_0();
 #endif
