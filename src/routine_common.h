@@ -7,8 +7,10 @@
 
 #define STACK_LEN 1024
 #define ROUTINE_SUM 0xFFFF
+
 #include "stdlib.h"
 #include "routine_dfa.h"
+
 typedef void *any;
 
 typedef unsigned long code_t;

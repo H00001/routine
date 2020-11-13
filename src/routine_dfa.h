@@ -24,9 +24,9 @@ typedef enum _EVENT {
 
 typedef STATUS (*t)(EVENT);
 
-STATUS status_tran(STATUS,EVENT);
+STATUS status_tran(STATUS, EVENT);
 
- STATUS CUB_0(EVENT e);
+STATUS CUB_0(EVENT e);
 
 static STATUS CT(EVENT e);
 
