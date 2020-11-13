@@ -19,14 +19,14 @@ int block(rid_t rid){
     if (ROUTINE_NR[rid]==NULL){
         return -1;
     }
-    return ROUTINE_NR[rid]->status = UB;
+    return ROUTINE_NR[rid]->status = status_tran(ROUTINE_NR[rid]->status,USER_BLOCK);
 }
 
 int resume(rid_t rid){
     if (ROUTINE_NR[rid]==NULL){
         return -1;
     }
-    return ROUTINE_NR[rid]->status = R;
+    return ROUTINE_NR[rid]->status = status_tran(ROUTINE_NR[rid]->status,USER_CONTINUE);
 }
 
 rid_t create_routine(any p) {

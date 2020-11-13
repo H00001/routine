@@ -2,21 +2,23 @@
 
 proutine head;
 proutine tail;
-static pcollect coll;
+static proutine ub_head;
+static proutine ub_tail;
+static preuse colls;
+static preuse colle;
 proutine ROUTINE_NR[ROUTINE_SUM];
 uroutine *UROUTINE_NR[ROUTINE_SUM];
 
 
-base_stack stack_from_collection() {
-    base_stack s = coll->bs;
-    pcollect pc = coll;
-    coll = coll->link.next;
+static data_p stack_from_collection() {
+    pcollect pc = pop_head(&colls, &colle);
+    data_p p = pc->bs.stack;
     free(pc);
-    return s;
+    return p;
 }
 
 static data_p acquire_stack0(int len) {
-    return coll == NULL ? malloc(len * sizeof(data_t)) : stack_from_collection().stack;
+    return colls == NULL ? malloc(len * sizeof(data_t)) : stack_from_collection();
 }
 
 void set_rid(proutine r) {
@@ -46,13 +48,10 @@ void remove_0() {
     uroutine *u1 = malloc(sizeof(uroutine));
     t->bs = head->bs;
 
-    if (coll != NULL) {
-        t->link.next = (pcollect) coll;
-    }
-    coll = t;
+    insert_head(&colls, &colle, &t->link);
 
     u1->consequence = head->rax;
-    u1->status = T;
+    u1->status = head->status;
     UROUTINE_NR[u1->rid = head->rid] = u1;
     remove_from_routine_list(head->rid);
 
