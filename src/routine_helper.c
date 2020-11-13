@@ -4,14 +4,14 @@
 void exchange_c(proutine *h, proutine *t) {
     proutine n = *h;
     proutine f = NULL, e = NULL;
-    for (;((n = n->next) == NULL) || (n->status == UB);) {
+    for (; ((n = n->next) == NULL) || (n->status == UB);) {
         if (n == NULL) {
             return;
         }
         f = f == NULL ? n : f;
         e = n;
     }
-    if(e!=NULL) {
+    if (e != NULL) {
         e->next = NULL;
     }
     n->status = R;

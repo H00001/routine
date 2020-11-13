@@ -57,13 +57,13 @@ preuse detach(preuse *head, preuse *tail, preuse p) {
     preuse ne = p->next;
     if (pr == NULL) {
         (*head) = ne;
-        ne->prev=NULL;
+        ne->prev = NULL;
     } else {
         pr->next = ne;
     }
     if (ne == NULL) {
         (*tail) = pr;
-        pr->next=NULL;
+        pr->next = NULL;
     } else {
         ne->prev = pr;
     }

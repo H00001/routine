@@ -15,18 +15,18 @@ STATUS get_status(rid_t rid) {
     return UROUTINE_NR[rid]->status;
 }
 
-int block(rid_t rid){
-    if (ROUTINE_NR[rid]==NULL){
+int block(rid_t rid) {
+    if (ROUTINE_NR[rid] == NULL) {
         return -1;
     }
-    return ROUTINE_NR[rid]->status = status_tran(ROUTINE_NR[rid]->status,USER_BLOCK);
+    return ROUTINE_NR[rid]->status = status_tran(ROUTINE_NR[rid]->status, USER_BLOCK);
 }
 
-int resume(rid_t rid){
-    if (ROUTINE_NR[rid]==NULL){
+int resume(rid_t rid) {
+    if (ROUTINE_NR[rid] == NULL) {
         return -1;
     }
-    return ROUTINE_NR[rid]->status = status_tran(ROUTINE_NR[rid]->status,USER_CONTINUE);
+    return ROUTINE_NR[rid]->status = status_tran(ROUTINE_NR[rid]->status, USER_CONTINUE);
 }
 
 rid_t create_routine(any p) {
