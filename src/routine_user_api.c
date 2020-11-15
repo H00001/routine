@@ -5,14 +5,14 @@
 #include "routine_user_api.h"
 
 extern proutine ROUTINE_NR[ROUTINE_SUM];
-extern uroutine *UROUTINE_NR[ROUTINE_SUM];
+extern uroutine UROUTINE_NR[ROUTINE_SUM];
 
 data_t get_consequence(rid_t rid) {
-    return UROUTINE_NR[rid]->consequence;
+    return UROUTINE_NR[rid].consequence;
 }
 
 STATUS get_status(rid_t rid) {
-    return UROUTINE_NR[rid]->status;
+    return UROUTINE_NR[rid].status;
 }
 
 static int user_cond(rid_t rid, enum _EVENT e) {
@@ -21,7 +21,7 @@ static int user_cond(rid_t rid, enum _EVENT e) {
     }
     int cur = ROUTINE_NR[rid]->status;
     int nxt = status_tran(ROUTINE_NR[rid]->status, e);
-    return create_event(rid,cur, nxt);
+    return create_event(rid, cur, nxt);
 }
 
 int block(rid_t rid) {

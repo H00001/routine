@@ -59,7 +59,7 @@ typedef struct _user_event {
     reuse u;
     EvenFn even;
     rid_t rid;
-} user_event,*p_event;
+} user_event, *p_event;
 
 preuse transfer_oe(proutine p);
 
@@ -67,7 +67,7 @@ proutine transfer_eo(preuse p);
 
 p_event transfer_event(preuse p);
 
-p_event create_event_1(rid_t rid,EvenFn even);
+p_event create_event_1(rid_t rid, EvenFn even);
 
 
 #endif //ROUTINE_ROUTINE_COMMON_H

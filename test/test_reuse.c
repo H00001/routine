@@ -43,11 +43,11 @@ int main() {
 //    pop_head(&head,&tail);
 //    test_printf(head);
 //    pop_head(&head,&tail);
-detach(&head,&tail,&(vv1->u));
+    detach(&head, &tail, &(vv1->u));
     test_printf(head);
-    detach(&head,&tail,&(vv2->u));
+    detach(&head, &tail, &(vv2->u));
     test_printf(head);
-    detach(&head,&tail,&(vv->u));
+    detach(&head, &tail, &(vv->u));
     test_printf(head);
 }
 
