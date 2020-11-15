@@ -35,8 +35,6 @@ __release:
 _exchange:                              
 	jmp	__save
 __n0:
-	movq    _head@GOTPCREL(%rip), %rdi
-    movq    _tail@GOTPCREL(%rip), %rsi
 	call	_exchange_c
 	jmp 	__release
 

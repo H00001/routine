@@ -24,10 +24,13 @@ int main()
     rid_t r = create_routine_with_params(routine_b, 1, 10);
     pid_t k = create_routine_with_params(routine_b, 1, 10);
     for (int i = 0; i < 1000; ++i) {
+
         create_routine_with_params(routine_b, 1, 10);
     }
     exchange();
+    printf("hello\n");
     exchange();
+    printf("hello\n");
     exchange();
     exchange();
     block(r);

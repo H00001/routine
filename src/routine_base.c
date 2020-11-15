@@ -1,17 +1,19 @@
 #include "routine_base.h"
 
-proutine head;
-proutine tail;
-static proutine ub_head;
-static proutine ub_tail;
+preuse head;
+preuse tail;
+static preuse event_queue_h = NULL;
+static preuse event_queue_r = NULL;
+static preuse ub_head;
+static preuse ub_tail;
 static preuse colls;
 static preuse colle;
 proutine ROUTINE_NR[ROUTINE_SUM];
-uroutine *UROUTINE_NR[ROUTINE_SUM];
+uroutine UROUTINE_NR[ROUTINE_SUM];
 
 
 static data_p stack_from_collection() {
-    pcollect pc = pop_head(&colls, &colle);
+    pcollect pc = transfer_co(pop_head(&colls, &colle));
     data_p p = pc->bs.stack;
     free(pc);
     return p;
@@ -31,7 +33,7 @@ proutine create_routine0(any p) {
     proutine r = init_routine();
     set_rid(r);
     init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p, stop_routine);
-    tail = tail->next = r;
+    insert_tail(&head, &tail, &r->u);
     return r;
 }
 
@@ -45,17 +47,32 @@ static void remove_from_routine_list(rid_t rid) {
 
 void remove_0() {
     pcollect t = malloc(sizeof(collect));
-    uroutine *u1 = malloc(sizeof(uroutine));
-    t->bs = head->bs;
+    proutine p = transfer_eo(head);
+    t->bs = p->bs;
 
     insert_head(&colls, &colle, &t->link);
 
-    u1->consequence = head->rax;
-    u1->status = head->status;
-    UROUTINE_NR[u1->rid = head->rid] = u1;
-    remove_from_routine_list(head->rid);
+    uroutine u1 = {.consequence= p->rax, .status= p->status, .rid=p->rid};
+    UROUTINE_NR[u1.rid] = u1;
 
-    proutine lh = head;
-    head = head->next;
-    free(lh);
+    remove_from_routine_list(p->rid);
+
+    free(transfer_eo(pop_head(&head, &tail)));
+}
+
+void exchange_c() {
+    preuse e = NULL;
+    while ((e = pop_head(&event_queue_h, &event_queue_r)) != NULL) {
+        p_event pe = transfer_event(e);
+        proutine v0 = transfer_eo(head);
+        proutine v1 = transfer_eo(head);
+        pe->even(&v0, &v1);
+    }
+    preuse h = pop_head(&head, &tail);
+    insert_tail(&head, &tail, h);
+    transfer_eo(get_top(&head, &tail))->status = R;
+}
+
+pcollect transfer_co(preuse p) {
+    return (pcollect) (p);
 }

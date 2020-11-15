@@ -10,6 +10,7 @@
 
 #include "stdlib.h"
 #include "routine_dfa.h"
+#include "reuse.h"
 
 typedef void *any;
 
@@ -44,11 +45,29 @@ typedef struct __routine {
     data_t r10;
     data_t rax;
     data_t rbx;
+    reuse u;
     base_stack bs;
     struct {
         STATUS status;
         rid_t rid;
     };
-    struct __routine *next;
 } routine, *proutine;
+
+typedef void(*EvenFn)(proutine *head, proutine *tail);
+
+typedef struct _user_event {
+    reuse u;
+    EvenFn even;
+    rid_t rid;
+} user_event,*p_event;
+
+preuse transfer_oe(proutine p);
+
+proutine transfer_eo(preuse p);
+
+p_event transfer_event(preuse p);
+
+p_event create_event_1(rid_t rid,EvenFn even);
+
+
 #endif //ROUTINE_ROUTINE_COMMON_H

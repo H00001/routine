@@ -69,3 +69,7 @@ preuse detach(preuse *head, preuse *tail, preuse p) {
     }
     return p;
 }
+
+preuse get_top(preuse *head, preuse *tail){
+    return *head;
+}

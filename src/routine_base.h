@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include<string.h>
-#include "reuse.h"
 #include "routine_common.h"
 #include "routine_helper.h"
 
@@ -11,6 +10,8 @@ typedef struct _collect {
     reuse link;
     base_stack bs;
 } collect, *pcollect;
+
+pcollect transfer_co(preuse p);
 
 extern void exchange();
 
@@ -22,9 +23,13 @@ static proutine create_current_routine();
 
 static void remove_from_routine_list(rid_t rid);
 
-static data_p stack_from_collection();
-
 void remove_0();
+
+void exchange_c();
+
+static proutine create_current_routine();
+
+static data_p stack_from_collection();
 
 #endif
 
