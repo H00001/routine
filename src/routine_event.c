@@ -14,15 +14,15 @@ p_event fetch_event() {
 
 void _ALL_TO_R(preuse *head, preuse *tail, preuse *ub_sta, preuse *ub_end, proutine curr) {
     curr->status = R;
-    insert_head(head, tail, &curr->u);
-    detach(ub_sta,ub_end, &curr->u);
+    insert_tail(head, tail, &curr->u);
+    detach(ub_sta, ub_end, &curr->u);
 }
 
-void R_TO_UB(preuse *head, preuse *tail, preuse *ub_sta, preuse *ub_end,  proutine curr) {
+void R_TO_UB(preuse *head, preuse *tail, preuse *ub_sta, preuse *ub_end, proutine curr) {
     detach(head, tail, &curr->u);
     // insert to uB queue
-    curr->status=UB;
-    insert_head(ub_sta, ub_end, &curr->u);
+    curr->status = UB;
+    insert_tail(ub_sta, ub_end, &curr->u);
 }
 
 STATUS push_event(rid_t id, STATUS s, STATUS n) {

@@ -30,8 +30,6 @@ int resume(rid_t rid);
 
 rid_t create_routine_with_params(any p, int num, ...);
 
-void _ALL_TO_R();
-
 static int user_cond(rid_t rid, enum _EVENT e);
 
 void insert_uroutine_map(rid_t id, data_t p, STATUS s);

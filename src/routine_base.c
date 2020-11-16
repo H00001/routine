@@ -38,6 +38,8 @@ void remove_0() {
     insert_uroutine_map(p->rid, p->rax, p->status);
     remove_from_routine_map(p->rid);
 
+    for (p_event e = NULL; (e = fetch_event()) != NULL; e->even(&head, &tail, &ub_head, &ub_tail, ROUTINE_NR[e->rid]));
+
     free(transfer_eo(pop_head(&head, &tail)));
 }
 
