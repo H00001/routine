@@ -6,10 +6,9 @@
 #define ROUTINE_ROUTINE_USER_API_H
 
 #include "routine_common.h"
+#include "routine_event.h"
+#include "routine_base.h"
 #include <stdarg.h>
-
-static preuse event_queue_h;
-static preuse event_queue_r;
 
 extern proutine create_routine0(any p);
 
@@ -27,10 +26,10 @@ extern void exchange();
 
 rid_t create_routine_with_params(any p, int num, ...);
 
-STATUS create_event(rid_t, STATUS s, STATUS n);
-
 void _ALL_TO_R();
 
 static int user_cond(rid_t rid, enum _EVENT e);
+
+void insert_uroutine_map(rid_t id, data_t p,STATUS s);
 
 #endif //ROUTINE_ROUTINE_USER_API_H

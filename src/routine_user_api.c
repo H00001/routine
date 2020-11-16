@@ -4,8 +4,7 @@
 
 #include "routine_user_api.h"
 
-extern proutine ROUTINE_NR[ROUTINE_SUM];
-extern uroutine UROUTINE_NR[ROUTINE_SUM];
+static uroutine UROUTINE_NR[ROUTINE_SUM];
 
 data_t get_consequence(rid_t rid) {
     return UROUTINE_NR[rid].consequence;
@@ -16,12 +15,14 @@ STATUS get_status(rid_t rid) {
 }
 
 static int user_cond(rid_t rid, enum _EVENT e) {
-    if (ROUTINE_NR[rid] == NULL) {
-        return -1;
+    proutine p;
+    if ((p = has_routine(rid)) == NULL) {
+        return false;
     }
-    int cur = ROUTINE_NR[rid]->status;
-    int nxt = status_tran(ROUTINE_NR[rid]->status, e);
-    return create_event(rid, cur, nxt);
+
+    int cur = p->status;
+    int nxt = status_tran(p->status, e);
+    return push_event(rid, cur, nxt);
 }
 
 int block(rid_t rid) {
@@ -48,12 +49,7 @@ rid_t create_routine_with_params(any p, int num, ...) {
     return r->rid;
 }
 
-void _ALL_TO_R(proutine *head, proutine *tail) {
-
-}
-
-STATUS create_event(rid_t id, STATUS s, STATUS n) {
-    p_event e = create_event_1(id, _ALL_TO_R);
-    insert_tail(&event_queue_h, &event_queue_r, &e->u);
-    return s;
+void insert_uroutine_map(rid_t id, data_t r, STATUS s) {
+    uroutine u1 = {.consequence= r, .status= s, .rid=id};
+    UROUTINE_NR[id] = u1;
 }

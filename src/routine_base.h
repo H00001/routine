@@ -6,19 +6,20 @@
 #include "routine_common.h"
 #include "routine_helper.h"
 #include "stack_collect.h"
-
-extern void exchange();
+#include "routine_event.h"
+#include "routine_user_api.h"
 
 extern void stop_routine();
 
 static proutine create_current_routine();
 
-static void remove_from_routine_list(rid_t rid);
+static void remove_from_routine_map(rid_t rid);
 
 void remove_0();
 
 void exchange_c();
 
+proutine has_routine(rid_t id);
 
 #endif
 

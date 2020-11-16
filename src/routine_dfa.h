@@ -9,10 +9,10 @@ typedef enum _STATUS {
     W = 0,
     Z,
     T = 2,
-    S,
-    D,
-    X,
-    R,
+    S ,
+    D ,
+    X ,
+    R ,
     UB,
     UNDEFINED
 } STATUS;

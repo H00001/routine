@@ -2,5 +2,9 @@ cmake_minimum_required(VERSION 3.17)
 project(routine)
 
 set(CMAKE_C_STANDARD 11)
-
+set(CMAKE_ASM_NASM_OBJECT_FORMAT "macho64")
+enable_language(ASM)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64")
+set(CMAKE_ASM_NASM_FLAGS "${CMAKE_ASM_NASM_FLAGS}  --prefix _")
+set(CMAKE_VERBOSE_MAKEFILE  on)
 add_executable(test main_t.c src/routine_helper.c src/routine_freebsd.s src/routine_common.c)

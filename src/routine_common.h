@@ -53,21 +53,15 @@ typedef struct __routine {
     };
 } routine, *proutine;
 
-typedef void(*EvenFn)(proutine *head, proutine *tail);
+typedef enum _bool {
+    true, false
+} bool;
 
-typedef struct _user_event {
-    reuse u;
-    EvenFn even;
-    rid_t rid;
-} user_event, *p_event;
+typedef void(*EvenFn)(preuse *head, preuse *tail,preuse *ub_sta,preuse *ub_end, proutine curr);
 
 preuse transfer_oe(proutine p);
 
 proutine transfer_eo(preuse p);
-
-p_event transfer_event(preuse p);
-
-p_event create_event_1(rid_t rid, EvenFn even);
 
 
 #endif //ROUTINE_ROUTINE_COMMON_H
