@@ -9,6 +9,7 @@
 #include "routine_event.h"
 #include "routine_user_api.h"
 
+
 extern void stop_routine();
 
 static proutine create_current_routine();
@@ -20,6 +21,12 @@ void remove_0();
 void exchange_c();
 
 proutine has_routine(rid_t id);
+
+rid_t create_sys_routine(any p, data_p dp);
+
+preuse transfer_oe(proutine p);
+
+proutine transfer_eo(preuse p);
 
 #endif
 

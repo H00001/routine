@@ -21,13 +21,6 @@ typedef unsigned long const *const_data_p;
 typedef int rid_t;
 typedef unsigned int s_size_t;
 
-typedef struct __u_routine {
-    rid_t rid;
-    data_t consequence;
-    STATUS status;
-} uroutine;
-
-
 typedef struct _base_stack {
     data_p stack;
     s_size_t size;
@@ -53,15 +46,34 @@ typedef struct __routine {
     };
 } routine, *proutine;
 
+typedef struct _queues {
+    struct {
+        reuse *r_queue_s;
+        reuse *r_queue_e;
+    };
+    struct {
+        reuse *ub_queue_s;
+        reuse *ub_queue_e;
+    };
+    struct {
+        reuse *w_queue_s;
+        reuse *w_queue_e;
+    };
+    struct {
+        reuse *s_queue_s;
+        reuse *s_queue_e;
+    };
+    struct {
+        reuse *t_queue_s;
+        reuse *t_queue_e;
+    };
+} routine_queues_t, *routine_queues_p;
+
 typedef enum _bool {
     true, false
 } bool;
 
-typedef void(*EvenFn)(preuse *head, preuse *tail,preuse *ub_sta,preuse *ub_end, proutine curr);
-
-preuse transfer_oe(proutine p);
-
-proutine transfer_eo(preuse p);
+typedef void(*EvenFn)(routine_queues_p, proutine curr);
 
 
 #endif //ROUTINE_ROUTINE_COMMON_H

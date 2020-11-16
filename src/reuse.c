@@ -55,6 +55,9 @@ preuse detach(preuse *head, preuse *tail, preuse p) {
     }
     preuse pr = p->prev;
     preuse ne = p->next;
+    if (pr==NULL&&ne==NULL){
+        return NULL;
+    }
     if (pr == NULL) {
         (*head) = ne;
         ne->prev = NULL;

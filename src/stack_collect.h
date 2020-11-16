@@ -19,4 +19,5 @@ void add_collect(base_stack b);
 static data_p stack_from_collection();
 
 data_p acquire_stack0(int len);
+
 #endif //ROUTINE_STACK_COLLECT_H

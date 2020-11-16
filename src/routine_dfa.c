@@ -5,7 +5,14 @@
 #include "routine_dfa.h"
 
 static STATUS CW(EVENT e) {
-    return W;
+    switch (e) {
+        case USER_BLOCK:
+            return UB;
+        case USER_CONTINUE:
+            return W;
+        default:
+            return W;
+    }
 }
 
 static STATUS CZ(EVENT e) {
@@ -30,7 +37,7 @@ static STATUS CR(EVENT e) {
         case USER_CONTINUE:
             return R;
         default:
-            return UB;
+            return R;
     }
 }
 
