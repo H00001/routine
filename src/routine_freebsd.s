@@ -1,7 +1,7 @@
 .text
 .globl	_exchange,_stop_routine
 __save:
-	movq    _head@GOTPCREL(%rip), %r11
+	    movq    _s_queues@GOTPCREL(%rip), %r11
         movq    (%r11),  	%r12
         subq    $88,%r12
         movq    %rsp,   	(%r12)
@@ -18,7 +18,7 @@ __save:
 	jmp	__n0
 
 __release:
-	movq    _head@GOTPCREL(%rip), %r11
+	movq    _s_queues@GOTPCREL(%rip), %r11
     movq	(%r11),  	%r12
     subq    $88,%r12
 	movq	(%r12),		%rsp
@@ -41,7 +41,7 @@ __n0:
 	jmp 	__release
 
 __save_:
-        movq    _head@GOTPCREL(%rip), %r11
+        movq    _s_queues@GOTPCREL(%rip), %r11
         movq    (%r11),          %r12
         subq    $88,%r12
         movq    %rax,           72(%r12)

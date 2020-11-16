@@ -20,7 +20,7 @@ int main() {
     rid_t e = create_routine_with_params(routine_add, 2, 3, 5);
     rid_t r = create_routine_with_params(routine_b, 1, 10);
     pid_t k = create_routine_with_params(routine_b, 1, 10);
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < 3; ++i) {
         create_routine_with_params(routine_b, 1, 10);
     }
     exchange();

@@ -17,12 +17,11 @@ STATUS get_status(rid_t rid) {
 static int user_cond(rid_t rid, enum _EVENT e) {
     proutine p;
     if ((p = has_routine(rid)) == NULL) {
-        return false;
+        return -1;
     }
-
     int cur = p->status;
     int nxt = status_tran(p->status, e);
-    return push_event(rid, cur, nxt);
+    return cur - nxt != 0 ? push_event(rid, cur, nxt) : 0;
 }
 
 int block(rid_t rid) {
@@ -30,6 +29,10 @@ int block(rid_t rid) {
 }
 
 int resume(rid_t rid) {
+    return user_cond(rid, USER_CONTINUE);
+}
+
+int sleep(rid_t rid) {
     return user_cond(rid, USER_CONTINUE);
 }
 

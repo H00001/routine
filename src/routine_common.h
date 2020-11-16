@@ -48,32 +48,32 @@ typedef struct __routine {
 
 typedef struct _queues {
     struct {
-        routine *ub_queue_s;
-        routine *ub_queue_e;
+        reuse *r_queue_s;
+        reuse *r_queue_e;
     };
     struct {
-        routine *w_queue_s;
-        routine *w_queue_e;
+        reuse *ub_queue_s;
+        reuse *ub_queue_e;
     };
     struct {
-        routine *r_queue_s;
-        routine *r_queue_e;
+        reuse *w_queue_s;
+        reuse *w_queue_e;
     };
     struct {
-        routine *s_queue_s;
-        routine *s_queue_e;
+        reuse *s_queue_s;
+        reuse *s_queue_e;
     };
     struct {
-        routine *t_queue_s;
-        routine *t_queue_e;
+        reuse *t_queue_s;
+        reuse *t_queue_e;
     };
-} routine_queues;
+} routine_queues_t, *routine_queues_p;
 
 typedef enum _bool {
     true, false
 } bool;
 
-typedef void(*EvenFn)(preuse *head, preuse *tail, preuse *ub_sta, preuse *ub_end, proutine curr);
+typedef void(*EvenFn)(routine_queues_p, proutine curr);
 
 
 #endif //ROUTINE_ROUTINE_COMMON_H
