@@ -1,61 +1,50 @@
 #include "routine_base.h"
 
-proutine head;
-proutine tail;
-static proutine ub_head;
-static proutine ub_tail;
-static preuse colls;
-static preuse colle;
-proutine ROUTINE_NR[ROUTINE_SUM];
-uroutine *UROUTINE_NR[ROUTINE_SUM];
-
-
-static data_p stack_from_collection() {
-    pcollect pc = pop_head(&colls, &colle);
-    data_p p = pc->bs.stack;
-    free(pc);
-    return p;
-}
-
-static data_p acquire_stack0(int len) {
-    return colls == NULL ? malloc(len * sizeof(data_t)) : stack_from_collection();
-}
-
-void set_rid(proutine r) {
-    static int curr_pid = 0;
-    ROUTINE_NR[r->rid = ++curr_pid] = r;
-}
+preuse head;
+preuse tail;
+static preuse ub_head;
+static preuse ub_tail;
+static proutine ROUTINE_NR[ROUTINE_SUM];
 
 proutine create_routine0(any p) {
-    ROUTINE_NR[0] = create_current_routine();
+    create_current_routine();
     proutine r = init_routine();
-    set_rid(r);
+    ROUTINE_NR[set_rid(r)] = r;
     init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p, stop_routine);
-    tail = tail->next = r;
+    insert_tail(&head, &tail, &r->u);
     return r;
 }
 
 static proutine create_current_routine() {
-    return ROUTINE_NR[0] != NULL ? ROUTINE_NR[0] : (tail = head = init_routine());
+    if (ROUTINE_NR[0] == NULL) {
+        proutine p = init_routine();
+        insert_head(&head, &tail, &p->u);
+        ROUTINE_NR[0] = p;
+    }
+    return ROUTINE_NR[0];
 }
 
-static void remove_from_routine_list(rid_t rid) {
+static void remove_from_routine_map(rid_t rid) {
     ROUTINE_NR[rid] = NULL;
 }
 
 void remove_0() {
-    pcollect t = malloc(sizeof(collect));
-    uroutine *u1 = malloc(sizeof(uroutine));
-    t->bs = head->bs;
+    proutine p = transfer_eo(head);
+    add_collect(p->bs);
 
-    insert_head(&colls, &colle, &t->link);
+    insert_uroutine_map(p->rid, p->rax, p->status);
+    remove_from_routine_map(p->rid);
 
-    u1->consequence = head->rax;
-    u1->status = head->status;
-    UROUTINE_NR[u1->rid = head->rid] = u1;
-    remove_from_routine_list(head->rid);
+    free(transfer_eo(pop_head(&head, &tail)));
+}
 
-    proutine lh = head;
-    head = head->next;
-    free(lh);
+void exchange_c() {
+    for (p_event e = NULL; (e = fetch_event()) != NULL; e->even(&head, &tail, &ub_head, &ub_tail, ROUTINE_NR[e->rid]));
+    preuse h = pop_head(&head, &tail);
+    insert_tail(&head, &tail, h);
+    transfer_eo(get_top(&head, &tail))->status = R;
+}
+
+proutine has_routine(rid_t id) {
+    return ROUTINE_NR[id];
 }

@@ -4,29 +4,33 @@
 
 #include "routine_user_api.h"
 
-extern proutine ROUTINE_NR[ROUTINE_SUM];
-extern uroutine *UROUTINE_NR[ROUTINE_SUM];
+static uroutine UROUTINE_NR[ROUTINE_SUM];
 
 data_t get_consequence(rid_t rid) {
-    return UROUTINE_NR[rid]->consequence;
+    return UROUTINE_NR[rid].consequence;
 }
 
 STATUS get_status(rid_t rid) {
-    return UROUTINE_NR[rid]->status;
+    return UROUTINE_NR[rid].status;
+}
+
+static int user_cond(rid_t rid, enum _EVENT e) {
+    proutine p;
+    if ((p = has_routine(rid)) == NULL) {
+        return false;
+    }
+
+    int cur = p->status;
+    int nxt = status_tran(p->status, e);
+    return push_event(rid, cur, nxt);
 }
 
 int block(rid_t rid) {
-    if (ROUTINE_NR[rid] == NULL) {
-        return -1;
-    }
-    return ROUTINE_NR[rid]->status = status_tran(ROUTINE_NR[rid]->status, USER_BLOCK);
+    return user_cond(rid, USER_BLOCK);
 }
 
 int resume(rid_t rid) {
-    if (ROUTINE_NR[rid] == NULL) {
-        return -1;
-    }
-    return ROUTINE_NR[rid]->status = status_tran(ROUTINE_NR[rid]->status, USER_CONTINUE);
+    return user_cond(rid, USER_CONTINUE);
 }
 
 rid_t create_routine(any p) {
@@ -43,4 +47,9 @@ rid_t create_routine_with_params(any p, int num, ...) {
     }
     va_end(p_list);
     return r->rid;
+}
+
+void insert_uroutine_map(rid_t id, data_t r, STATUS s) {
+    uroutine u1 = {.consequence= r, .status= s, .rid=id};
+    UROUTINE_NR[id] = u1;
 }

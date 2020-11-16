@@ -12,3 +12,5 @@ void insert_tail(preuse *head, preuse *tail, preuse p);
 preuse pop_head(preuse *head, preuse *tail);
 
 preuse detach(preuse *head, preuse *tail, preuse p);
+
+preuse get_top(preuse *head, preuse *tail);

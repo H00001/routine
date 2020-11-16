@@ -10,6 +10,7 @@
 
 #include "stdlib.h"
 #include "routine_dfa.h"
+#include "reuse.h"
 
 typedef void *any;
 
@@ -44,11 +45,23 @@ typedef struct __routine {
     data_t r10;
     data_t rax;
     data_t rbx;
+    reuse u;
     base_stack bs;
     struct {
         STATUS status;
         rid_t rid;
     };
-    struct __routine *next;
 } routine, *proutine;
+
+typedef enum _bool {
+    true, false
+} bool;
+
+typedef void(*EvenFn)(preuse *head, preuse *tail,preuse *ub_sta,preuse *ub_end, proutine curr);
+
+preuse transfer_oe(proutine p);
+
+proutine transfer_eo(preuse p);
+
+
 #endif //ROUTINE_ROUTINE_COMMON_H

@@ -11,8 +11,8 @@
 
 void init_stack(proutine r, data_p stack, int len, any p, any stop);
 
-void exchange_c(proutine *head, proutine *tail);
-
 proutine init_routine();
+
+rid_t set_rid(proutine r);
 
 #endif //ROUTINE_ROUTINE_HELPER_H
