@@ -9,6 +9,7 @@ typedef struct _v {
     reuse u;
     unsigned long k;
 } v;
+
 preuse head = NULL;
 preuse tail = NULL;
 

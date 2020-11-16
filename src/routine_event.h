@@ -5,6 +5,7 @@
 #ifndef ROUTINE_ROUTINE_EVENT_H
 #define ROUTINE_ROUTINE_EVENT_H
 #include "routine_common.h"
+#include "routine_base.h"
 
 static preuse event_queue_h = NULL;
 static preuse event_queue_r = NULL;

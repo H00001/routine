@@ -21,13 +21,6 @@ typedef unsigned long const *const_data_p;
 typedef int rid_t;
 typedef unsigned int s_size_t;
 
-typedef struct __u_routine {
-    rid_t rid;
-    data_t consequence;
-    STATUS status;
-} uroutine;
-
-
 typedef struct _base_stack {
     data_p stack;
     s_size_t size;
@@ -59,9 +52,6 @@ typedef enum _bool {
 
 typedef void(*EvenFn)(preuse *head, preuse *tail,preuse *ub_sta,preuse *ub_end, proutine curr);
 
-preuse transfer_oe(proutine p);
-
-proutine transfer_eo(preuse p);
 
 
 #endif //ROUTINE_ROUTINE_COMMON_H

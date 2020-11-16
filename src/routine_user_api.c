@@ -34,19 +34,19 @@ int resume(rid_t rid) {
 }
 
 rid_t create_routine(any p) {
-    return create_routine0(p)->rid;
+    return create_sys_routine(p, NULL);
 }
 
 rid_t create_routine_with_params(any p, int num, ...) {
-    proutine r = create_routine0(p);
+    data_p dp0 = malloc(7 * sizeof(data_t));
+    data_p dp = dp0;
     va_list p_list;
     va_start(p_list, num);
-    data_p w = &(r->rdi);
-    for (int i = 0; i < num; i++, w++) {
-        (*w) = va_arg(p_list, data_t);
+    for (int i = 0; i < num; i++, dp++) {
+        (*dp) = va_arg(p_list, data_t);
     }
     va_end(p_list);
-    return r->rid;
+    return create_sys_routine(p, dp0);
 }
 
 void insert_uroutine_map(rid_t id, data_t r, STATUS s) {
