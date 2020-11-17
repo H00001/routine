@@ -4,3 +4,6 @@ a.out.DSYM
 *.h.gch
 linux
 freebsd
+dockDockBuildParams.json
+build
+checker
