@@ -9,10 +9,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-void init_stack(proutine r, data_p stack, int len, any p, any stop);
+void init_stack(routine_p r, data_p stack, int len, any p, any stop);
 
-proutine init_routine();
+routine_p init_routine();
 
-rid_t set_rid(proutine r);
+rid_t set_rid(routine_p r);
 
 #endif //ROUTINE_ROUTINE_HELPER_H

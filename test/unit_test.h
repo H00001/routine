@@ -8,4 +8,6 @@
 
 int test_eq(int v0, int v1);
 
+int test_p_eq(void *v0, void *v1);
+
 #endif //ROUTINE_UNIT_TEST_HH

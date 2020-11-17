@@ -38,34 +38,34 @@ typedef struct __routine {
     data_t r10;
     data_t rax;
     data_t rbx;
-    reuse u;
+    reuse_t u;
     base_stack bs;
     struct {
         STATUS status;
         rid_t rid;
     };
-} routine, *proutine;
+} routine_t, *routine_p;
 
 typedef struct _queues {
     struct {
-        reuse *r_queue_s;
-        reuse *r_queue_e;
+        reuse_t *r_queue_s;
+        reuse_t *r_queue_e;
     };
     struct {
-        reuse *ub_queue_s;
-        reuse *ub_queue_e;
+        reuse_t *ub_queue_s;
+        reuse_t *ub_queue_e;
     };
     struct {
-        reuse *w_queue_s;
-        reuse *w_queue_e;
+        reuse_t *w_queue_s;
+        reuse_t *w_queue_e;
     };
     struct {
-        reuse *s_queue_s;
-        reuse *s_queue_e;
+        reuse_t *s_queue_s;
+        reuse_t *s_queue_e;
     };
     struct {
-        reuse *t_queue_s;
-        reuse *t_queue_e;
+        reuse_t *t_queue_s;
+        reuse_t *t_queue_e;
     };
 } routine_queues_t, *routine_queues_p;
 
@@ -73,7 +73,7 @@ typedef enum _bool {
     true, false
 } bool;
 
-typedef void(*EvenFn)(routine_queues_p, proutine curr);
+typedef void(*EvenFn)(routine_queues_p, routine_p curr);
 
 
 #endif //ROUTINE_ROUTINE_COMMON_H

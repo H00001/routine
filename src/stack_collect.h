@@ -8,11 +8,11 @@
 #include "routine_common.h"
 
 typedef struct _collect {
-    reuse link;
+    reuse_t link;
     base_stack bs;
-} collect, *pcollect;
+} collect_t, *collect_p;
 
-pcollect transfer_co(preuse p);
+collect_p transfer_co(reuse_p p);
 
 void add_collect(base_stack b);
 

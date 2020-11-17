@@ -4,21 +4,22 @@
 
 #ifndef ROUTINE_ROUTINE_EVENT_H
 #define ROUTINE_ROUTINE_EVENT_H
+
 #include "routine_common.h"
 #include "routine_base.h"
 
-static preuse event_queue_h = NULL;
-static preuse event_queue_r = NULL;
+static reuse_p event_queue_h = NULL;
+static reuse_p event_queue_r = NULL;
 
 typedef struct _user_event {
-    reuse u;
+    reuse_t u;
     EvenFn even;
     rid_t rid;
 } user_event, *p_event;
 
 p_event fetch_event();
 
-p_event transfer_event(preuse p);
+p_event transfer_event(reuse_p p);
 
 STATUS push_event(rid_t, STATUS s, STATUS n);
 

@@ -12,7 +12,7 @@
 
 extern void stop_routine();
 
-static proutine create_current_routine();
+static routine_p create_current_routine();
 
 static void remove_from_routine_map(rid_t rid);
 
@@ -20,13 +20,13 @@ void remove_0();
 
 void exchange_c();
 
-proutine has_routine(rid_t id);
+routine_p has_routine(rid_t id);
 
 rid_t create_sys_routine(any p, data_p dp);
 
-preuse transfer_oe(proutine p);
+reuse_p transfer_oe(routine_p p);
 
-proutine transfer_eo(preuse p);
+routine_p transfer_eo(reuse_p p);
 
 #endif
 

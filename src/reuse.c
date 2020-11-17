@@ -1,6 +1,6 @@
 #include "reuse.h"
 
-static int init(preuse *head, preuse *tail, preuse p) {
+static int init(reuse_p *head, reuse_p *tail, reuse_p p) {
     if ((*head) == (*tail) && (*head) == NULL) {
         (*head) = p;
         (*tail) = p;
@@ -11,31 +11,31 @@ static int init(preuse *head, preuse *tail, preuse p) {
     return 0;
 }
 
-void insert_head(preuse *head, preuse *tail, preuse p) {
+void insert_head(reuse_p *head, reuse_p *tail, reuse_p p) {
     if (init(head, tail, p)) {
         return;
     }
-    preuse s = *head;
+    reuse_p s = *head;
     *head = p;
     p->next = s;
     s->prev = p;
 }
 
-void insert_tail(preuse *head, preuse *tail, preuse p) {
+void insert_tail(reuse_p *head, reuse_p *tail, reuse_p p) {
     if (init(head, tail, p)) {
         return;
     }
-    preuse s = *tail;
+    reuse_p s = *tail;
     *tail = p;
     p->prev = s;
     s->next = p;
 }
 
-preuse pop_head(preuse *head, preuse *tail) {
+reuse_p pop_head(reuse_p *head, reuse_p *tail) {
     if (*head == NULL) {
         return NULL;
     }
-    preuse s = *head;
+    reuse_p s = *head;
     if (*head == *tail) {
         *tail = NULL;
         *head = NULL;
@@ -47,14 +47,14 @@ preuse pop_head(preuse *head, preuse *tail) {
     return s;
 }
 
-preuse detach(preuse *head, preuse *tail, preuse p) {
+reuse_p detach(reuse_p *head, reuse_p *tail, reuse_p p) {
     if (*head == *tail) {
         (*head) = NULL;
         (*tail) = NULL;
         return p;
     }
-    preuse pr = p->prev;
-    preuse ne = p->next;
+    reuse_p pr = p->prev;
+    reuse_p ne = p->next;
     if (pr==NULL&&ne==NULL){
         return NULL;
     }
@@ -73,6 +73,6 @@ preuse detach(preuse *head, preuse *tail, preuse p) {
     return p;
 }
 
-preuse get_top(preuse *head, preuse *tail) {
+reuse_p get_top(reuse_p *head) {
     return *head;
 }

@@ -3,14 +3,14 @@
 typedef struct _reuse {
     struct _reuse *prev;
     struct _reuse *next;
-} reuse, *preuse;
+} reuse_t, *reuse_p;
 
-void insert_head(preuse *head, preuse *tail, preuse p);
+void insert_head(reuse_p *head, reuse_p *tail, reuse_p p);
 
-void insert_tail(preuse *head, preuse *tail, preuse p);
+void insert_tail(reuse_p *head, reuse_p *tail, reuse_p p);
 
-preuse pop_head(preuse *head, preuse *tail);
+reuse_p pop_head(reuse_p *head, reuse_p *tail);
 
-preuse detach(preuse *head, preuse *tail, preuse p);
+reuse_p detach(reuse_p *head, reuse_p *tail, reuse_p p);
 
-preuse get_top(preuse *head, preuse *tail);
+reuse_p get_top(reuse_p *head);
