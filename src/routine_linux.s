@@ -1,8 +1,9 @@
 .text
 .globl	exchange,stop_routine
 __save:
-	movq    $head, %r11
-        movq    (%r11),         %r12
+	movq    $s_queues,	%r12
+	movq    (%r12),		%r12
+	subq    $88,		%r12
         movq    %rsp,           (%r12)
         movq    %rbp,           8(%r12)
         movq    %rdi,           16(%r12)
@@ -17,8 +18,9 @@ __save:
 	jmp	__n0
 
 __release:
-	movq    $head, %r11
+	movq    $s_queues,	%r11
 	movq    (%r11),         %r12
+	subq    $88,		%r12
         movq    (%r12),         %rsp
         movq    8(%r12),        %rbp
         movq    16(%r12),       %rdi
@@ -35,16 +37,15 @@ __release:
 exchange:
 	jmp	__save
 __n0:
-	movq    $head, %rdi
-    movq    $tail, %rsi
 	call	exchange_c
 	jmp 	__release
 
 __save_:
-        movq    $head,		%r9
-        movq    (%r9),          %r8
-        movq    %rax,           72(%r8)
-        movq    %rdx,           32(%r8)
+        movq    $s_queues,	%r11
+        movq    (%r11),		%r12
+	subq    $88,		%r12
+        movq    %rax,           72(%r12)
+        movq    %rdx,           32(%r12)
         jmp     __n0_
 
 stop_routine:
