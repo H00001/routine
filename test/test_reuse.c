@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include "../src/reuse.h"
+#include "unit_test.h"
 
 typedef struct _v {
     reuse u;
@@ -23,12 +24,12 @@ void test_printf(preuse head) {
     printf("\n");
 }
 
-int test_insert_head(){
+int test_insert_head() {
     v *vv = malloc(sizeof(v));
     vv->k = 1;
-    insert_head(&head,&tail,&vv->u);
-    unsigned long *l1 = pop_head(&head,&tail);
-    test_eq(*(l1+2),1);
+    insert_head(&head, &tail, &vv->u);
+    unsigned long *l1 = pop_head(&head, &tail);
+    test_eq(*(l1 + 2), 1);
 }
 
 int main() {
