@@ -12,6 +12,7 @@ check:
 
 distcheck:
 	make checker
+
 .PHONY:clean
 clean:
 	rm *.o freebsd linux

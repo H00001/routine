@@ -4,7 +4,7 @@
 
 #include "routine_event.h"
 
-p_event transfer_event(preuse p) {
+p_event transfer_event(reuse_p p) {
     return (p_event) (p);
 }
 
@@ -12,14 +12,14 @@ p_event fetch_event() {
     return transfer_event(pop_head(&event_queue_h, &event_queue_r));
 }
 
-void _ALL_TO_R(routine_queues_p q, proutine curr) {
+void _ALL_TO_R(routine_queues_p q, routine_p curr) {
     // ?
     curr->status = R;
     insert_tail(&q->r_queue_s, &q->r_queue_e, &curr->u);
     detach(&q->ub_queue_s, &q->ub_queue_e, &curr->u);
 }
 
-void R_TO_UB(routine_queues_p q, proutine curr) {
+void R_TO_UB(routine_queues_p q, routine_p curr) {
     detach(&q->r_queue_s, &q->r_queue_e, &curr->u);
     // insert to uB queue
     // detach fail ?
@@ -28,11 +28,10 @@ void R_TO_UB(routine_queues_p q, proutine curr) {
     insert_tail(&q->ub_queue_s, &q->ub_queue_e, &curr->u);
 }
 
-void emp(routine_queues_p q, proutine curr) {
+void emp(routine_queues_p q, routine_p curr) {
 }
 
 STATUS push_event(rid_t id, STATUS s, STATUS n) {
-    printf("cuuu:%d,%d", s, n);
     static EvenFn events[][8] = {
             {emp,       emp,       _ALL_TO_R, _ALL_TO_R, _ALL_TO_R, _ALL_TO_R, _ALL_TO_R, _ALL_TO_R},
             {_ALL_TO_R, _ALL_TO_R, _ALL_TO_R, _ALL_TO_R, _ALL_TO_R, _ALL_TO_R, _ALL_TO_R, _ALL_TO_R},

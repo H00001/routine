@@ -15,7 +15,7 @@ STATUS get_status(rid_t rid) {
 }
 
 static int user_cond(rid_t rid, enum _EVENT e) {
-    proutine p;
+    routine_p p;
     if ((p = has_routine(rid)) == NULL) {
         return -1;
     }

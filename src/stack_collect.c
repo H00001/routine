@@ -1,28 +1,28 @@
 //
-// Created by dos DRTT on 11/15/20.
+// Created by dos frank on 11/15/20.
 //
 
 #include "stack_collect.h"
 
-static preuse colls;
-static preuse colle;
+static reuse_p coll_s;
+static reuse_p coll_e;
 
-pcollect transfer_co(preuse p) {
-    return (pcollect) (p);
+collect_p transfer_co(reuse_p p) {
+    return (collect_p) (p);
 }
 
 void add_collect(base_stack b) {
-    pcollect pc = malloc(sizeof(collect));
+    collect_p pc = malloc(sizeof(collect_t));
     pc->bs = b;
-    insert_head(&colls, &colle, &pc->link);
+    insert_head(&coll_s, &coll_e, &pc->link);
 }
 
 data_p acquire_stack0(int len) {
-    return colls == NULL ? malloc(len * sizeof(data_t)) : stack_from_collection();
+    return coll_s == NULL ? malloc(len * sizeof(data_t)) : stack_from_collection();
 }
 
 static data_p stack_from_collection() {
-    pcollect pc = transfer_co(pop_head(&colls, &colle));
+    collect_p pc = transfer_co(pop_head(&coll_s, &coll_e));
     data_p p = pc->bs.stack;
     free(pc);
     return p;
