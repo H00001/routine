@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/cc  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/test.dir/main_t.c.o CMakeFiles/test.dir/src/routine_helper.c.o CMakeFiles/test.dir/src/routine_common.c.o -o test 

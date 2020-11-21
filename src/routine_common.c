@@ -3,5 +3,6 @@
 //
 #include "routine_common.h"
 
-
-
+int func_common(){
+    return 0;
+}

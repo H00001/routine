@@ -1,3 +1,0 @@
-/Users/dosdrtt/oslib/oslab/routine/build/CMakeFiles/rebuild_cache.dir
-/Users/dosdrtt/oslib/oslab/routine/build/CMakeFiles/edit_cache.dir
-/Users/dosdrtt/oslib/oslab/routine/build/CMakeFiles/test.dir

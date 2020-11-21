@@ -35,6 +35,7 @@ void remove_0() {
     insert_uroutine_map(p->rid, p->rax, p->status);
     remove_from_routine_map(p->rid);
 
+    foreach(s_queues.s_queue_s, s_queues.r_queue_e, ROUTINE_SLEEP);
     for (p_event e = NULL; (e = fetch_event()) != NULL; e->even(&s_queues, ROUTINE_NR[e->rid]));
 
     free(transfer_eo(pop_head(&s_queues.r_queue_s, &s_queues.r_queue_e)));

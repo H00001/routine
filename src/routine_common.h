@@ -20,6 +20,7 @@ typedef unsigned long *data_p;
 typedef unsigned long const *const_data_p;
 typedef int rid_t;
 typedef unsigned int s_size_t;
+typedef unsigned int tick_t;
 
 typedef struct _base_stack {
     data_p stack;
@@ -44,6 +45,7 @@ typedef struct __routine {
         STATUS status;
         rid_t rid;
     };
+    tick_t tick;
 } routine_t, *routine_p;
 
 typedef struct _queues {
@@ -74,6 +76,9 @@ typedef enum _bool {
 } bool;
 
 typedef void(*EvenFn)(routine_queues_p, routine_p curr);
+
+int func_common();
+
 
 
 #endif //ROUTINE_ROUTINE_COMMON_H

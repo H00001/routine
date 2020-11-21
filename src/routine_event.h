@@ -19,6 +19,8 @@ typedef struct _user_event {
 
 p_event fetch_event();
 
+int ROUTINE_SLEEP(reuse_p r);
+
 p_event transfer_event(reuse_p p);
 
 STATUS push_event(rid_t, STATUS s, STATUS n);
