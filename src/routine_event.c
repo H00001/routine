@@ -12,8 +12,11 @@ p_event fetch_event() {
     return transfer_event(pop_head(&event_queue_h, &event_queue_r));
 }
 
+int ROUTINE_SLEEP(reuse_p r) {
+    return transfer_eo(r)->tick-- != 0 ? 0 : -1;
+}
+
 void _ALL_TO_R(routine_queues_p q, routine_p curr) {
-    // ?
     curr->status = R;
     insert_tail(&q->r_queue_s, &q->r_queue_e, &curr->u);
     detach(&q->ub_queue_s, &q->ub_queue_e, &curr->u);
@@ -21,9 +24,6 @@ void _ALL_TO_R(routine_queues_p q, routine_p curr) {
 
 void R_TO_UB(routine_queues_p q, routine_p curr) {
     detach(&q->r_queue_s, &q->r_queue_e, &curr->u);
-    // insert to uB queue
-    // detach fail ?
-
     curr->status = UB;
     insert_tail(&q->ub_queue_s, &q->ub_queue_e, &curr->u);
 }

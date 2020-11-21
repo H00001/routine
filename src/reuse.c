@@ -55,7 +55,7 @@ reuse_p detach(reuse_p *head, reuse_p *tail, reuse_p p) {
     }
     reuse_p pr = p->prev;
     reuse_p ne = p->next;
-    if (pr==NULL&&ne==NULL){
+    if (pr == NULL && ne == NULL) {
         return NULL;
     }
     if (pr == NULL) {
@@ -75,4 +75,16 @@ reuse_p detach(reuse_p *head, reuse_p *tail, reuse_p p) {
 
 reuse_p get_top(reuse_p *head) {
     return *head;
+}
+
+int foreach(reuse_p head, reuse_p tail, callback c) {
+    if (tail == head && head == NULL) {
+        return -1;
+    }
+    for (reuse_p move = head; move != NULL; move = move->next) {
+        if (c(move) != 0) {
+            break;
+        }
+    }
+    return 0;
 }
