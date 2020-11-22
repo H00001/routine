@@ -7,5 +7,5 @@ freebsd
 dockDockBuildParams.json
 build
 checker
-libroutine.a
+test/libroutine.a
 bitmap
