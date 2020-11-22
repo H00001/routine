@@ -2,10 +2,10 @@ CC:=gcc-10 -std=gnu11
 compile:=gcc-10 -c
 base=routine_base.c stack_collect.c reuse.c routine_helper.c routine_user_api.c routine_dfa.c routine_common.c routine_event.c
 objs=$(base:.c=.o) routine_freebsd.o
+CFLAGES=-arch x86_64 -g -fPIC
 
 lib:$(objs)
 	ar crv libroutine.a $(objs)
-	rm -rf *.o
 
 routine_base.o:src/routine_base.c
 	$(compile) $(CFLAGES) $^ -o $@
@@ -46,8 +46,6 @@ distcheck:
 
 .c.o:$(base)
 	gcc -c $< build/$@
-
-include ./test/makefile
 
 .PHONY:clean
 clean:

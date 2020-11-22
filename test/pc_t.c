@@ -2,7 +2,7 @@
 // Created by dos DRTT on 11/20/20.
 //
 
-#include "./src/routine_user_api.h"
+#include "../src/routine_user_api.h"
 #include "stdio.h"
 
 static int buff[100];
@@ -33,7 +33,6 @@ int main() {
     exchange();
     exchange();
     exchange();
-
 
 
 }
