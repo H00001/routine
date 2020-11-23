@@ -37,7 +37,7 @@ int sleep(rid_t rid) {
 }
 
 rid_t create_routine(any p) {
-    return create_sys_routine(p, NULL);
+    return create_sys_routine(p, NULL,execute_complete);
 }
 
 rid_t create_routine_with_params(any p, int num, ...) {
@@ -49,10 +49,14 @@ rid_t create_routine_with_params(any p, int num, ...) {
         (*dp) = va_arg(p_list, data_t);
     }
     va_end(p_list);
-    return create_sys_routine(p, dp0);
+    return create_sys_routine(p, dp0,execute_complete);
 }
 
 void insert_uroutine_map(rid_t id, data_t r, STATUS s) {
     uroutine u1 = {.consequence= r, .status= s, .rid=id};
     UROUTINE_NR[id] = u1;
+}
+
+static void execute_complete(rid_t id, data_t r, STATUS s) {
+    insert_uroutine_map(id, r, s);
 }

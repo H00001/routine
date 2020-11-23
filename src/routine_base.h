@@ -7,7 +7,6 @@
 #include "routine_helper.h"
 #include "stack_collect.h"
 #include "routine_event.h"
-#include "routine_user_api.h"
 
 
 extern void stop_routine();
@@ -22,11 +21,13 @@ void exchange_c();
 
 routine_p has_routine(rid_t id);
 
-rid_t create_sys_routine(any p, data_p dp);
+rid_t create_sys_routine(any p, data_p dp,comp u);
 
 reuse_p transfer_oe(routine_p p);
 
 routine_p transfer_eo(reuse_p p);
+
+static void system_clean(rid_t id, data_t p, STATUS s);
 
 #endif
 

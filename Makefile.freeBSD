@@ -44,9 +44,6 @@ check:
 distcheck:
 	make bitmap
 
-.c.o:$(base)
-	gcc -c $< build/$@
-
 .PHONY:clean
 clean:
 	rm *.o freebsd linux checker

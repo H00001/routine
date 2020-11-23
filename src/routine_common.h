@@ -22,6 +22,9 @@ typedef int rid_t;
 typedef unsigned int s_size_t;
 typedef unsigned int tick_t;
 
+typedef void(*comp)(rid_t id, data_t r, STATUS s);
+
+
 typedef struct _base_stack {
     data_p stack;
     s_size_t size;
@@ -45,6 +48,7 @@ typedef struct __routine {
         STATUS status;
         rid_t rid;
     };
+    comp uf;
     tick_t tick;
 } routine_t, *routine_p;
 
@@ -78,7 +82,6 @@ typedef enum _bool {
 typedef void(*EvenFn)(routine_queues_p, routine_p curr);
 
 int func_common();
-
 
 
 #endif //ROUTINE_ROUTINE_COMMON_H

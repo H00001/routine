@@ -3,9 +3,9 @@
 static routine_p ROUTINE_NR[ROUTINE_SUM];
 routine_queues_t s_queues;
 
-rid_t create_sys_routine(any p, data_p dt) {
+rid_t create_sys_routine(any p, data_p dt, comp u) {
     create_current_routine();
-    routine_p r = init_routine();
+    routine_p r = init_routine(u);
     ROUTINE_NR[set_rid(r)] = r;
     init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p, stop_routine);
     insert_tail(&s_queues.r_queue_s, &s_queues.r_queue_e, &r->u);
@@ -17,11 +17,15 @@ rid_t create_sys_routine(any p, data_p dt) {
 
 static routine_p create_current_routine() {
     if (ROUTINE_NR[0] == NULL) {
-        routine_p p = init_routine();
+        routine_p p = init_routine(system_clean);
         insert_head(&s_queues.r_queue_s, &s_queues.r_queue_e, &p->u);
         ROUTINE_NR[0] = p;
     }
     return ROUTINE_NR[0];
+}
+
+static void system_clean(rid_t id, data_t p, STATUS s){
+
 }
 
 static void remove_from_routine_map(rid_t rid) {
@@ -32,7 +36,8 @@ void remove_0() {
     routine_p p = transfer_eo(s_queues.r_queue_s);
     add_collect(p->bs);
 
-    insert_uroutine_map(p->rid, p->rax, p->status);
+    p->uf(p->rid, p->rax, p->status);
+
     remove_from_routine_map(p->rid);
 
     foreach(s_queues.s_queue_s, s_queues.r_queue_e, ROUTINE_SLEEP);
