@@ -3,6 +3,8 @@
 //
 #include "routine_common.h"
 
-int func_common(){
-    return 0;
+
+routine_p transfer_eo(reuse_p p) {
+    data_p k = (data_p) p;
+    return (routine_p) (k - 11);
 }

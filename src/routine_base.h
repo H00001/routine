@@ -25,8 +25,6 @@ rid_t create_sys_routine(any p, data_p dp,comp u);
 
 reuse_p transfer_oe(routine_p p);
 
-routine_p transfer_eo(reuse_p p);
-
 static void system_clean(rid_t id, data_t p, STATUS s);
 
 #endif

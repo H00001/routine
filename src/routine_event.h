@@ -6,7 +6,6 @@
 #define ROUTINE_ROUTINE_EVENT_H
 
 #include "routine_common.h"
-#include "routine_base.h"
 
 static reuse_p event_queue_h = NULL;
 static reuse_p event_queue_r = NULL;

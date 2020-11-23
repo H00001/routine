@@ -5,7 +5,6 @@
 #ifndef ROUTINE_ROUTINE_USER_API_H
 #define ROUTINE_ROUTINE_USER_API_H
 
-#include "routine_common.h"
 #include "routine_event.h"
 #include "routine_base.h"
 #include <stdarg.h>

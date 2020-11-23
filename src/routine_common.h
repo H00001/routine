@@ -31,17 +31,17 @@ typedef struct _base_stack {
 } base_stack;
 
 typedef struct __routine {
-    code_t esp;
-    code_t ebp;
-    data_t rdi;
-    data_t rsi;
-    data_t rdx;
-    data_t rcx;
-    data_t r8;
-    data_t r9;
-    data_t r10;
-    data_t rax;
-    data_t rbx;
+    volatile code_t esp;
+    volatile code_t ebp;
+    volatile data_t rdi;
+    volatile data_t rsi;
+    volatile data_t rdx;
+    volatile data_t rcx;
+    volatile data_t r8;
+    volatile data_t r9;
+    volatile data_t r10;
+    volatile data_t rax;
+    volatile data_t rbx;
     reuse_t u;
     base_stack bs;
     struct {
@@ -49,21 +49,22 @@ typedef struct __routine {
         rid_t rid;
     };
     comp uf;
+    rid_t pid;
     tick_t tick;
 } routine_t, *routine_p;
 
 typedef struct _queues {
     struct {
-        reuse_t *r_queue_s;
-        reuse_t *r_queue_e;
+         reuse_t *r_queue_s;
+         reuse_t *r_queue_e;
     };
     struct {
-        reuse_t *ub_queue_s;
-        reuse_t *ub_queue_e;
+         reuse_t *ub_queue_s;
+         reuse_t *ub_queue_e;
     };
     struct {
-        reuse_t *w_queue_s;
-        reuse_t *w_queue_e;
+         reuse_t *w_queue_s;
+         reuse_t *w_queue_e;
     };
     struct {
         reuse_t *s_queue_s;
@@ -81,7 +82,6 @@ typedef enum _bool {
 
 typedef void(*EvenFn)(routine_queues_p, routine_p curr);
 
-int func_common();
-
+routine_p transfer_eo(reuse_p p);
 
 #endif //ROUTINE_ROUTINE_COMMON_H
