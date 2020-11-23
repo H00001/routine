@@ -34,4 +34,6 @@ static int user_cond(rid_t rid, enum _EVENT e);
 
 void insert_uroutine_map(rid_t id, data_t p, STATUS s);
 
+static void execute_complete();
+
 #endif //ROUTINE_ROUTINE_USER_API_H
