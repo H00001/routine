@@ -22,7 +22,7 @@ typedef int rid_t;
 typedef unsigned int s_size_t;
 typedef unsigned int tick_t;
 
-typedef void(*comp)(rid_t id, data_t r, STATUS s);
+typedef void(*comp)(rid_t id, rid_t pid, data_t r, STATUS s);
 
 
 typedef struct _base_stack {
@@ -33,7 +33,7 @@ typedef struct _base_stack {
 typedef struct __routine {
     volatile code_t esp;
     volatile code_t ebp;
-    volatile data_t rdi;
+    data_t rdi;
     volatile data_t rsi;
     volatile data_t rdx;
     volatile data_t rcx;
@@ -55,16 +55,16 @@ typedef struct __routine {
 
 typedef struct _queues {
     struct {
-         reuse_t *r_queue_s;
-         reuse_t *r_queue_e;
+        reuse_t *r_queue_s;
+        reuse_t *r_queue_e;
     };
     struct {
-         reuse_t *ub_queue_s;
-         reuse_t *ub_queue_e;
+        reuse_t *ub_queue_s;
+        reuse_t *ub_queue_e;
     };
     struct {
-         reuse_t *w_queue_s;
-         reuse_t *w_queue_e;
+        reuse_t *w_queue_s;
+        reuse_t *w_queue_e;
     };
     struct {
         reuse_t *s_queue_s;

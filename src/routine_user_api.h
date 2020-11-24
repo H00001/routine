@@ -11,6 +11,7 @@
 
 typedef struct __u_routine {
     rid_t rid;
+    rid_t pid;
     data_t consequence;
     STATUS status;
 } uroutine;
@@ -31,8 +32,12 @@ rid_t create_routine_with_params(any p, int num, ...);
 
 static int user_cond(rid_t rid, enum _EVENT e);
 
-void insert_uroutine_map(rid_t id, data_t p, STATUS s);
+void insert_uroutine_map(rid_t id, rid_t pid, data_t p, STATUS s);
 
 static void execute_complete();
+
+rid_t get_prid(rid_t);
+
+rid_t get_curr_rid();
 
 #endif //ROUTINE_ROUTINE_USER_API_H

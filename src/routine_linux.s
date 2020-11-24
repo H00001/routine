@@ -32,6 +32,7 @@ __release:
         movq    64(%r12),       %r10
         movq    72(%r12),       %rax
         movq    80(%r12),       %rbx
+        movq    88(%r12),       %eflages
         retq
 
 exchange:

@@ -21,11 +21,15 @@ void exchange_c();
 
 routine_p has_routine(rid_t id);
 
-rid_t create_sys_routine(any p, data_p dp,comp u);
+rid_t create_sys_routine(any p, data_p dp, comp u);
 
 reuse_p transfer_oe(routine_p p);
 
-static void system_clean(rid_t id, data_t p, STATUS s);
+static void system_clean(rid_t id, rid_t pid, data_t p, STATUS s);
+
+rid_t get_pid(rid_t rid);
+
+rid_t get_curr_rid_();
 
 #endif
 
