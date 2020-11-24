@@ -7,7 +7,10 @@ int routine_b(int k) {
     for (int i = 0; i < k; i++) {
         exchange();
         printf("i is :%d\n", i);
+
     }
+    pid_t p = create_routine_with_params(routine_b, 2, 3, 5);
+    printf("pid:%d,curr is %d\n", get_prid(p), get_curr_rid());
     return 42;
 }
 
@@ -60,6 +63,58 @@ int main() {
     exchange();
     exchange();
     exchange();
-    printf("routineid:%d result:%lu,status:%d\n", e, get_consequence(e), get_status(e));
-    printf("routineid:%d result:%lu,status:%d\n", r, get_consequence(r), get_status(r));
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    printf("routineid:%d result:%lu,status:%d,pid:%d\n", e, get_consequence(e), get_status(e), get_prid(e));
+    printf("routineid:%d result:%lu,status:%d,pid:%d\n", r, get_consequence(r), get_status(r), get_prid(e));
 }

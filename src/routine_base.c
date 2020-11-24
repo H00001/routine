@@ -5,7 +5,7 @@ routine_queues_t s_queues;
 
 rid_t create_sys_routine(any p, data_p dt, comp u) {
     create_current_routine();
-    routine_p r = init_routine(u);
+    routine_p r = init_routine(u, transfer_eo(s_queues.r_queue_s)->rid);
     ROUTINE_NR[set_rid(r)] = r;
     init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p, stop_routine);
     insert_tail(&s_queues.r_queue_s, &s_queues.r_queue_e, &r->u);
@@ -17,14 +17,14 @@ rid_t create_sys_routine(any p, data_p dt, comp u) {
 
 static routine_p create_current_routine() {
     if (ROUTINE_NR[0] == NULL) {
-        routine_p p = init_routine(system_clean);
+        routine_p p = init_routine(system_clean, 0);
         insert_head(&s_queues.r_queue_s, &s_queues.r_queue_e, &p->u);
         ROUTINE_NR[0] = p;
     }
     return ROUTINE_NR[0];
 }
 
-static void system_clean(rid_t id, data_t p, STATUS s){
+static void system_clean(rid_t id, rid_t pid, data_t p, STATUS s) {
 
 }
 
@@ -36,7 +36,7 @@ void remove_0() {
     routine_p p = transfer_eo(s_queues.r_queue_s);
     add_collect(p->bs);
 
-    p->uf(p->rid, p->rax, p->status);
+    p->uf(p->rid, p->pid, p->rax, p->status);
 
     remove_from_routine_map(p->rid);
 
@@ -47,7 +47,9 @@ void remove_0() {
 }
 
 void exchange_c() {
-    for (p_event e = NULL; (e = fetch_event()) != NULL; e->even(&s_queues, ROUTINE_NR[e->rid]));
+    for (p_event e = NULL; (e = fetch_event()) != NULL;) {
+        e->even(&s_queues, ROUTINE_NR[e->rid]);
+    }
     insert_tail(&s_queues.r_queue_s, &s_queues.r_queue_e, pop_head(&s_queues.r_queue_s, &s_queues.r_queue_e));
     transfer_eo(get_top(&s_queues.r_queue_s))->status = R;
 }
@@ -60,7 +62,13 @@ reuse_p transfer_oe(routine_p p) {
     return &p->u;
 }
 
-routine_p transfer_eo(reuse_p p) {
-    data_p k = (data_p) p;
-    return (routine_p) (k - 11);
+rid_t get_pid(rid_t rid) {
+    if (ROUTINE_NR[rid] == NULL) {
+        return -1;
+    }
+    return ROUTINE_NR[rid]->pid;
+}
+
+rid_t get_curr_rid_() {
+    return transfer_eo(s_queues.r_queue_s)->rid;
 }

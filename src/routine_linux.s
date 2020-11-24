@@ -32,6 +32,7 @@ __release:
         movq    64(%r12),       %r10
         movq    72(%r12),       %rax
         movq    80(%r12),       %rbx
+        movq    88(%r12),       %eflages
         retq
 
 exchange:
@@ -43,7 +44,7 @@ __n0:
 __save_:
         movq    $s_queues,	%r11
         movq    (%r11),		%r12
-	subq    $88,		%r12
+	    subq    $88,		%r12
         movq    %rax,           72(%r12)
         movq    %rdx,           32(%r12)
         jmp     __n0_
