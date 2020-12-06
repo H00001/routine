@@ -42,6 +42,7 @@ typedef struct __routine {
     volatile data_t r10;
     volatile data_t rax;
     volatile data_t rbx;
+    volatile data_t r11;
     reuse_t u;
     base_stack bs;
     struct {
