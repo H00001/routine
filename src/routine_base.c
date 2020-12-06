@@ -4,6 +4,7 @@ static routine_p ROUTINE_NR[ROUTINE_SUM];
 routine_queues_t s_queues;
 
 rid_t create_sys_routine(any p, data_p dt, comp u) {
+    // create current routine
     create_current_routine();
     routine_p r = init_routine(u, transfer_eo(s_queues.r_queue_s)->rid);
     ROUTINE_NR[set_rid(r)] = r;
