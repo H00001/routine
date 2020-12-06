@@ -115,6 +115,14 @@ int main() {
     exchange();
     exchange();
     exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
+    exchange();
     printf("routineid:%d result:%lu,status:%d,pid:%d\n", e, get_consequence(e), get_status(e), get_prid(e));
     printf("routineid:%d result:%lu,status:%d,pid:%d\n", r, get_consequence(r), get_status(r), get_prid(e));
 }
