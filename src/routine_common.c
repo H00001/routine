@@ -6,5 +6,5 @@
 
 routine_p transfer_eo(reuse_p p) {
     data_p k = (data_p) p;
-    return (routine_p) (k - 11);
+    return (routine_p) (k - 12);
 }
