@@ -2,10 +2,8 @@
 
 static int init(reuse_p *head, reuse_p *tail, reuse_p p) {
     if ((*head) == (*tail) && (*head) == NULL) {
-        (*head) = p;
-        (*tail) = p;
-        p->prev = NULL;
-        p->next = NULL;
+        (*head) = (*tail) = p;
+        p->prev = p->next = NULL;
         return 1;
     }
     return 0;
@@ -47,7 +45,7 @@ reuse_p pop_head(reuse_p *head, reuse_p *tail) {
     return s;
 }
 
-reuse_p detach(volatile reuse_p *head,volatile reuse_p *tail,volatile reuse_p p) {
+reuse_p detach(volatile reuse_p *head, volatile reuse_p *tail, volatile reuse_p p) {
     if (*head == *tail) {
         (*head) = NULL;
         (*tail) = NULL;
@@ -77,7 +75,7 @@ reuse_p get_top(reuse_p *head) {
     return *head;
 }
 
-int foreach(volatile reuse_p head,volatile reuse_p tail,volatile callback c) {
+int foreach(volatile reuse_p head, volatile reuse_p tail, volatile callback c) {
     if (tail == head && head == NULL) {
         return -1;
     }

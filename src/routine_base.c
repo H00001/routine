@@ -26,7 +26,6 @@ static routine_p create_current_routine() {
 }
 
 static void system_clean(rid_t id, rid_t pid, data_t p, STATUS s) {
-
 }
 
 static void remove_from_routine_map(rid_t rid) {

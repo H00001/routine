@@ -2,7 +2,7 @@
 #define __ROUTINE_H__
 
 #include <stdlib.h>
-#include<string.h>
+#include <string.h>
 #include "routine_common.h"
 #include "routine_helper.h"
 #include "stack_collect.h"
