@@ -4,11 +4,11 @@ __save:
 	movq    $s_queues,	%r12
 	movq    (%r12),		%r12
 	subq    $88,		%r12
-        movq    %rsp,           (%r12)
-        movq    %rbp,           8(%r12)
-        movq    %rdi,           16(%r12)
-        movq    %rsi,           24(%r12)
-        movq    %rdx,           32(%r12)
+    movq    %rsp,           (%r12)
+    movq    %rbp,           8(%r12)
+    movq    %rdi,           16(%r12)
+    movq    %rsi,           24(%r12)
+    movq    %rdx,           32(%r12)
         movq    %rcx,           40(%r12)
         movq    %r8,            48(%r12)
         movq    %r9,            56(%r12)
