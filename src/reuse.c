@@ -35,20 +35,17 @@ reuse_p pop_head(reuse_p *head, reuse_p *tail) {
     }
     reuse_p s = *head;
     if (*head == *tail) {
-        *tail = NULL;
-        *head = NULL;
+        *tail = *head = NULL;
         return s;
     }
     (*head) = s->next;
-    (*head)->prev = NULL;
-    s->next = NULL;
+    s->next = (*head)->prev = NULL;
     return s;
 }
 
 reuse_p detach(volatile reuse_p *head, volatile reuse_p *tail, volatile reuse_p p) {
     if (*head == *tail) {
-        (*head) = NULL;
-        (*tail) = NULL;
+        (*head) = (*tail) = NULL;
         return p;
     }
     reuse_p pr = p->prev;
@@ -81,8 +78,22 @@ int foreach(volatile reuse_p head, volatile reuse_p tail, volatile callback c) {
     }
     for (reuse_p move = head; move != NULL; move = move->next) {
         if (c(move) != 0) {
-            break;
+            return 3;
         }
     }
     return 0;
+}
+
+reuse_p get(volatile reuse_p *head, volatile reuse_p *tail, callback c) {
+    if (*tail == *head && *head == NULL) {
+        return NULL;
+    }
+    for (reuse_p move = *head; move != NULL; move = move->next) {
+        if (c(move) == 1) {
+            return move;
+        } else if (c(move) == 2) {
+            return detach(head, tail, move);
+        }
+    }
+    return NULL;
 }

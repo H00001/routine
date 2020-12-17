@@ -40,4 +40,8 @@ rid_t get_prid(rid_t);
 
 rid_t get_curr_rid();
 
+void wait_all();
+
+void wait_rt(rid_t id);
+
 #endif //ROUTINE_ROUTINE_USER_API_H

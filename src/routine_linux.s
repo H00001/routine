@@ -9,12 +9,12 @@ __save:
     movq    %rdi,           16(%r12)
     movq    %rsi,           24(%r12)
     movq    %rdx,           32(%r12)
-        movq    %rcx,           40(%r12)
-        movq    %r8,            48(%r12)
-        movq    %r9,            56(%r12)
-        movq    %r10,           64(%r12)
-        movq    %rax,           72(%r12)
-        movq    %rbx,           80(%r12)
+    movq    %rcx,           40(%r12)
+    movq    %r8,            48(%r12)
+    movq    %r9,            56(%r12)
+    movq    %r10,           64(%r12)
+    movq    %rax,           72(%r12)
+    movq    %rbx,           80(%r12)
 	jmp	__n0
 
 __release:

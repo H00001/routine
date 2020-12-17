@@ -4,7 +4,10 @@ checker:test_reuse.c ../src/reuse.c unit_test.c
 bitmap:test_bitmap.c ../src/bitmap.c unit_test.c
 	$(CC) $^ -o $@
 
-pc:pc_t.c libroutine.a
+wait:test_wait.c
+	gcc-10 $< ../build/*.o -o $@
+
+pc:pc_t.c
 	gcc-10 $< ../build/*.o -o $@ 
 
 
