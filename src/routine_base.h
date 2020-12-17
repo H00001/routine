@@ -31,5 +31,7 @@ rid_t get_pid(rid_t rid);
 
 rid_t get_curr_rid_();
 
+rid_t get_once_child(rid_t id);
+
 #endif
 

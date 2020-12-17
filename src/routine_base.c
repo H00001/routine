@@ -18,7 +18,7 @@ rid_t create_sys_routine(any p, data_p dt, comp u) {
 
 static routine_p create_current_routine() {
     if (ROUTINE_NR[0] == NULL) {
-        routine_p p = init_routine(system_clean, 0);
+        routine_p p = init_routine(system_clean, -1);
         insert_head(&s_queues.r_queue_s, &s_queues.r_queue_e, &p->u);
         ROUTINE_NR[0] = p;
     }
@@ -71,4 +71,19 @@ rid_t get_pid(rid_t rid) {
 
 rid_t get_curr_rid_() {
     return transfer_eo(s_queues.r_queue_s)->rid;
+}
+
+
+rid_t get_once_child(rid_t id) {
+    if (id >= 1) {
+        return ROUTINE_NR[id] == NULL ? -1 : id;
+    }
+    reuse_p rp;
+    int find_child(reuse_p v) {
+        return transfer_eo(v)->pid == get_curr_rid_() ? 1 : 0;
+    }
+    if ((rp = get(&s_queues.r_queue_s, &s_queues.r_queue_e, find_child)) != NULL) {
+        return transfer_eo(rp)->rid;
+    }
+    return -1;
 }

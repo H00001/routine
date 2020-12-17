@@ -72,3 +72,13 @@ rid_t get_prid(rid_t id) {
 rid_t get_curr_rid() {
     return get_curr_rid_();
 }
+
+void wait_all() {
+    wait_rt(-1);
+}
+
+void wait_rt(rid_t id) {
+    for (; get_once_child(id) != -1;) {
+        exchange();
+    }
+}

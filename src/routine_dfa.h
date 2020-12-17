@@ -6,6 +6,7 @@
 #define ROUTINE_ROUTINE_DFA_H
 
 typedef enum _STATUS {
+    // wait for running
     W = 0,
     Z,
     T = 2,
