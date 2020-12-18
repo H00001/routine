@@ -3,10 +3,13 @@
 //
 
 #include "../src/routine_user_api.h"
-#include "stdio.h"
+#include "unit_test.h"
+
 
 static int buff[100];
 static int k = 0;
+
+volatile static int p1;
 
 void product();
 
@@ -15,43 +18,25 @@ void consume();
 int main() {
     create_routine(product);
     create_routine(consume);
-    exchange();
-    exchange();
-    exchange();
-    printf("main\n");
-    exchange();
-    exchange();
-    exchange();
-    exchange();
-    exchange();
-    exchange();
-    printf("main\n");
-    exchange();
-    exchange();
-    exchange();
-    printf("main\n");
-    exchange();
-    exchange();
-    exchange();
-
-
+    wait_all();
 }
 
 void product() {
-    printf("product\n");
+    printf("product running\n");
     for (int i = 0; i < 100; ++i) {
-        printf("product1\n");
-        buff[k++] = rand();
-        printf("produc2\n");
+        buff[k++] = rand() % 100;
+        printf("product:%d\n", buff[k - 1]);
+        p1 = buff[k - 1];
         exchange();
     }
 }
 
 void consume() {
-    printf("consume\n");
+    printf("consume running\n");
     for (int i = 0; i < 100; ++i) {
-        int v = buff[k--];
-        printf("%d\n", v);
+        int v = buff[--k];
+        printf("consume:%d\n", v);
+        test_eq(v, p1);
         exchange();
     }
 }
