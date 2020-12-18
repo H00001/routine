@@ -11,6 +11,8 @@ void insert_head(reuse_p *head, reuse_p *tail, reuse_p p);
 
 void insert_tail(reuse_p *head, reuse_p *tail, reuse_p p);
 
+void insert_head_0(reuse_p reu, reuse_p p);
+
 reuse_p pop_head(reuse_p *head, reuse_p *tail);
 
 reuse_p detach(volatile reuse_p *head, volatile reuse_p *tail, reuse_p p);

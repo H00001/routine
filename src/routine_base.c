@@ -4,20 +4,23 @@ static routine_p ROUTINE_NR[ROUTINE_SUM];
 routine_queues_t s_queues;
 
 rid_t create_sys_routine(any p, data_p dt, comp u) {
-    // Create current routine
-    create_current_routine();
+    create_root_routine();
     routine_p r = init_routine(u, transfer_eo(s_queues.r_queue_s)->rid);
-    ROUTINE_NR[set_rid(r)] = r;
     init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p, stop_routine);
-    // Insert routine to list tail.
+
+    ROUTINE_NR[set_rid(r)] = r;
     insert_tail(&s_queues.r_queue_s, &s_queues.r_queue_e, &r->u);
     if (dt != NULL) {
-        memcpy(&r->rdi, dt, 6 * sizeof(data_t));
+        set_init_params(&r->rdi, dt);
     }
     return r->rid;
 }
 
-static routine_p create_current_routine() {
+static void set_init_params(data_p p, data_p params) {
+    memcpy(p, params, 6 * sizeof(data_t));
+}
+
+static routine_p create_root_routine() {
     if (ROUTINE_NR[0] == NULL) {
         routine_p p = init_routine(system_clean, -1);
         insert_head(&s_queues.r_queue_s, &s_queues.r_queue_e, &p->u);

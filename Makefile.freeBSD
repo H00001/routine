@@ -6,6 +6,8 @@ CFLAGES=-arch x86_64 -g -fPIC
 
 lib:$(objs)
 	ar crv libroutine.a $(objs)
+	mv *.o ./build
+	mv libroutine.a ./build
 
 routine_base.o:src/routine_base.c
 	$(compile) $(CFLAGES) $^ -o $@
