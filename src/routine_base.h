@@ -11,7 +11,7 @@
 
 extern void stop_routine();
 
-static routine_p create_current_routine();
+static routine_p create_root_routine();
 
 static void remove_from_routine_map(rid_t rid);
 
@@ -24,6 +24,8 @@ routine_p has_routine(rid_t id);
 rid_t create_sys_routine(any p, data_p dp, comp u);
 
 reuse_p transfer_oe(routine_p p);
+
+static void set_init_params(data_p p, data_p params);
 
 static void system_clean(rid_t id, rid_t pid, data_t p, STATUS s);
 

@@ -19,6 +19,10 @@ void insert_head(reuse_p *head, reuse_p *tail, reuse_p p) {
     s->prev = p;
 }
 
+void insert_head_0(reuse_p reu, reuse_p p) {
+    insert_head(&reu->prev, &reu->next, p);
+}
+
 void insert_tail(reuse_p *head, reuse_p *tail, reuse_p p) {
     if (init(head, tail, p)) {
         return;

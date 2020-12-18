@@ -8,6 +8,7 @@
 #define STACK_LEN 1024
 #define ROUTINE_SUM 0xFFFFFF
 
+#include "bitmap.h"
 #include "stdlib.h"
 #include "routine_dfa.h"
 #include "reuse.h"
@@ -47,6 +48,7 @@ typedef struct __routine {
     volatile data_t r14;
     volatile data_t r15;
     reuse_t u;
+    bits child;
     base_stack bs;
     struct {
         STATUS status;
@@ -88,5 +90,6 @@ bool;
 typedef void(*EvenFn)(routine_queues_p, routine_p curr);
 
 routine_p transfer_eo(reuse_p p);
+
 
 #endif //ROUTINE_ROUTINE_COMMON_H

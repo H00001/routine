@@ -9,7 +9,7 @@ static int buff1[SIZE];
 static int k = 0;
 static int k1 = 0;
 volatile static int p1;
-int n = 100000;
+int n = 50000;
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -72,11 +72,11 @@ void consume() {
 void product1() {
     for (int i = 0; i < SIZE; ++i) {
         pthread_mutex_lock(&mutex);
-        if (k1 == SIZE) {
+        if (k1 == SIZE - 1) {
             pthread_mutex_unlock(&mutex);
             return;
         }
-        buff[k++] = rand() % 100;
+        buff[k1++] = rand() % 100;
         pthread_mutex_unlock(&mutex);
     }
 }
