@@ -27,18 +27,18 @@ __release:
     movq    24(%r12),       %rsi
     movq    32(%r12),       %rdx
     movq    40(%r12),       %rcx
-        movq    48(%r12),       %r8
-        movq    56(%r12),       %r9
-        movq    64(%r12),       %r10
-        movq    72(%r12),       %rax
-        movq    80(%r12),       %rbx
-        movq    88(%r12),       %eflages
-        retq
+    movq    48(%r12),       %r8
+    movq    56(%r12),       %r9
+    movq    64(%r12),       %r10
+    movq    72(%r12),       %rax
+    movq    80(%r12),       %rbx
+    movq    88(%r12),       %eflages
+    retq
 
 exchange:
 	jmp	__save
 __n0:
-	call	exchange_c
+	call	sys_exchange
 	jmp 	__release
 
 __save_:

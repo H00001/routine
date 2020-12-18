@@ -47,7 +47,7 @@ void remove_0() {
     free(transfer_eo(pop_head(&s_queues.r_queue_s, &s_queues.r_queue_e)));
 }
 
-void exchange_c() {
+void sys_exchange() {
     for (p_event e = NULL; (e = fetch_event()) != NULL;) {
         e->even(&s_queues, ROUTINE_NR[e->rid]);
     }

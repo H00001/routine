@@ -17,7 +17,7 @@ static void remove_from_routine_map(rid_t rid);
 
 void remove_0();
 
-void exchange_c();
+void sys_exchange();
 
 routine_p has_routine(rid_t id);
 

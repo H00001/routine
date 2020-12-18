@@ -45,7 +45,7 @@ __release:
 _exchange:
 	jmp	__save
 __n0:
-	call	_exchange_c
+	call	_sys_exchange
 	jmp 	__release
 
 __save_:
