@@ -5,6 +5,7 @@
 #ifndef ROUTINE_UNIT_TEST_HH
 #define ROUTINE_UNIT_TEST_HH
 
+#include<stdio.h>
 
 int test_eq(int v0, int v1);
 
