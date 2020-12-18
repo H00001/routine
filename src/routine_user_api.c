@@ -62,23 +62,19 @@ static void execute_complete(rid_t id, rid_t pid, data_t r, STATUS s) {
 }
 
 rid_t get_prid(rid_t id) {
-    rid_t k;
-    if ((k = get_pid(id)) < 0) {
-        return UROUTINE_NR[id].pid;
-    }
-    return k;
+    return get_pid(id) < 0 ? UROUTINE_NR[id].pid : get_pid(id);
 }
 
 rid_t get_curr_rid() {
     return get_curr_rid_();
 }
 
-void wait_all() {
-    wait_rt(-1);
+int wait_all() {
+    return wait_rt(-1);
 }
 
-void wait_rt(rid_t id) {
-    for (; get_once_child(id) != -1;) {
-        exchange();
-    }
+int wait_rt(rid_t id) {
+    int i = 0;
+    for (; get_once_child(id) != -1; i++, exchange());
+    return i;
 }

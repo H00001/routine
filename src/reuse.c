@@ -72,7 +72,7 @@ reuse_p get_top(reuse_p *head) {
     return *head;
 }
 
-int foreach(volatile reuse_p head, volatile reuse_p tail, volatile callback c) {
+int foreach(volatile reuse_p head, volatile reuse_p tail, callback c) {
     if (tail == head && head == NULL) {
         return -1;
     }
