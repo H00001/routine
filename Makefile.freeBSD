@@ -39,10 +39,8 @@ freebsd: $(objs) main_t.c
 	rm -rf *.o
 
 check:
-	make checker
 
 distcheck:
-	make bitmap
 
 .PHONY:clean
 clean:
