@@ -1,3 +1,5 @@
+#include "unit_test.h"
+
 int test_eq(int v0, int v1) {
     if (v0 == v1) {
         printf("\033[92m[PASS]\033[0m %d\n", v0);

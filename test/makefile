@@ -10,4 +10,7 @@ wait:test_wait.c unit_test.c
 pc:pc_t.c unit_test.c
 	gcc-10 $^ ../build/*.o -o $@
 
+compare:compare.c unit_test.c
+	gcc-10 $^ ../build/*.o -o $@
+
 

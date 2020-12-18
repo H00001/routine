@@ -6,7 +6,7 @@
 #define ROUTINE_ROUTINE_COMMON_H
 
 #define STACK_LEN 1024
-#define ROUTINE_SUM 0xFFFF
+#define ROUTINE_SUM 0xFFFFFF
 
 #include "stdlib.h"
 #include "routine_dfa.h"
@@ -82,7 +82,8 @@ typedef struct _queues {
 
 typedef enum _bool {
     true, false
-} bool;
+}
+bool;
 
 typedef void(*EvenFn)(routine_queues_p, routine_p curr);
 

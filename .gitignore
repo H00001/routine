@@ -9,3 +9,4 @@ build
 checker
 test/libroutine.a
 bitmap
+libroutine.a
