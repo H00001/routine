@@ -18,11 +18,8 @@ int routine_add(int a, int b) {
 
 int main() {
     pid_t k = create_routine_with_params(routine_b, 1, 100);
-    printf("rid:%d,pid:%d\n", k, get_prid(k));
-    exchange();
-    exchange();
-    exchange();
-    exchange();
-    wait_all();
-    printf("rid:%d,pid:%d\n", k, get_prid(k));
+    create_routine_with_params(routine_b, 1, 100);
+    create_routine_with_params(routine_b, 1, 100);
+    int wa = wait_all();
+    printf("rid:%d,pid:%d,wait:%d\n", k, get_prid(k), wa);
 }

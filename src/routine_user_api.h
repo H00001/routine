@@ -40,8 +40,14 @@ rid_t get_prid(rid_t);
 
 rid_t get_curr_rid();
 
-void wait_all();
+int wait_all();
 
-void wait_rt(rid_t id);
+/**
+ * wait routine, current routine will wait it's child routine
+ * that specified executed complete.
+ * @param id child routine id
+ * @return wait times. times of executing function of `exchange`
+ */
+int wait_rt(rid_t id);
 
 #endif //ROUTINE_ROUTINE_USER_API_H
