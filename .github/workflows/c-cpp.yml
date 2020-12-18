@@ -9,13 +9,9 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: make linux
-        run: make linux
-      - name: make check
-        run: make check
-      - name: make distcheck
-        run: make distcheck
+      - name: test0
+        run: make -f Makefile.freeBSD lib
