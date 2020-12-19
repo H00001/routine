@@ -6,7 +6,7 @@
 #include "./unit_test.h"
 
 int main() {
-    bits b = bit_new(110);
+    bitmap b = bit_new(110);
 
     for (int i = 0; i <100 ; ++i) {
         bit_set(b, i, 1);

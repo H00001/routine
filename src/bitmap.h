@@ -17,15 +17,15 @@ typedef struct _Bits {
     unsigned long *bits;
     bit_size length;
     bit_size _length;
-} *bits;
+} *bitmap;
 
 
-bits bit_new(bit_size length);
+bitmap bit_new(bit_size length);
 
-void bit_destroy(bits bit);
+void bit_destroy(bitmap bit);
 
-unsigned int bit_length(bits bit);
+unsigned int bit_length(bitmap bit);
 
-void bit_set(bits bit, unsigned int pos, unsigned char value);
+void bit_set(bitmap bit, unsigned int pos, unsigned char value);
 
-char bit_get(bits bit, unsigned int pos);
+char bit_get(bitmap bit, unsigned int pos);

@@ -3,30 +3,21 @@
 static routine_p ROUTINE_NR[ROUTINE_SUM];
 routine_queues_t s_queues;
 
-rid_t create_sys_routine(any p, data_p dt, comp u) {
-    create_root_routine();
-    routine_p r = init_routine(u, transfer_eo(s_queues.r_queue_s)->rid);
-    init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p, stop_routine);
-
-    ROUTINE_NR[set_rid(r)] = r;
-    insert_tail(&s_queues.r_queue_s, &s_queues.r_queue_e, &r->u);
-    if (dt != NULL) {
-        set_init_params(&r->rdi, dt);
+rid_t create_sys_routine(any p, data_p params, comp u) {
+    if (ROUTINE_NR[0] == NULL) {
+        create_root_routine(system_clean, NULL, NULL);
     }
+    routine_p r = create_root_routine(u, transfer_eo(s_queues.r_queue_s), params);
+    init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p, stop_routine);
     return r->rid;
 }
 
-static void set_init_params(data_p p, data_p params) {
-    memcpy(p, params, 6 * sizeof(data_t));
-}
 
-static routine_p create_root_routine() {
-    if (ROUTINE_NR[0] == NULL) {
-        routine_p p = init_routine(system_clean, -1);
-        insert_head(&s_queues.r_queue_s, &s_queues.r_queue_e, &p->u);
-        ROUTINE_NR[0] = p;
-    }
-    return ROUTINE_NR[0];
+static routine_p create_root_routine(comp u, routine_p p, data_p params) {
+    routine_p r = init_routine(u, p, params);
+    insert_tail(&s_queues.r_queue_s, &s_queues.r_queue_e, &r->u);
+    ROUTINE_NR[r->rid] = r;
+    return r;
 }
 
 static void system_clean(rid_t id, rid_t pid, data_t p, STATUS s) {
