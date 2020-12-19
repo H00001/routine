@@ -17,6 +17,12 @@ void consume();
 
 int main() {
     create_routine(product);
+    create_routine(product);
+    create_routine(product);
+    create_routine(product);
+    create_routine(consume);
+    create_routine(consume);
+    create_routine(consume);
     create_routine(consume);
     wait_all();
 }

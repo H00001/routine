@@ -5,8 +5,8 @@
 #include "bitmap.h"
 
 
-bits bit_new(bit_size length) {
-    bits new_bits = malloc(sizeof(struct _Bits));
+bitmap bit_new(bit_size length) {
+    bitmap new_bits = malloc(sizeof(struct _Bits));
     if (new_bits == NULL)
         return NULL;
 
@@ -17,28 +17,28 @@ bits bit_new(bit_size length) {
     return new_bits;
 }
 
-void bit_destroy(bits bit) {
+void bit_destroy(bitmap bit) {
     free(bit->bits);
     free(bit);
 }
 
-unsigned int bit_length(bits bit) {
+unsigned int bit_length(bitmap bit) {
     return bit->length;
 }
 
-void bit_set(bits bit, unsigned int pos, unsigned char value) {
+void bit_set(bitmap bit, unsigned int pos, unsigned char value) {
     unsigned long mask = 1 << (pos & 63);
     bit->bits[(pos >> 6)] = value ? bit->bits[(pos >> 6)] | mask :
                             bit->bits[(pos >> 6)] & ~mask;
 }
 
-char bit_get(bits bit, unsigned int pos) {
+char bit_get(bitmap bit, unsigned int pos) {
     unsigned long mask = 1 << (pos & 63);
     return (mask & bit->bits[(pos >> 6)]) > 0 ? 1 : 0;
 }
 
 
-unsigned long get_zero(bits b) {
+unsigned long get_zero(bitmap b) {
     for (unsigned long i = 0; i < b->_length; i++) {
         if (~(b->bits[i]) > 0) {
             for (int j = 0; j < 64; j++) {

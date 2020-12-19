@@ -48,14 +48,14 @@ typedef struct __routine {
     volatile data_t r14;
     volatile data_t r15;
     reuse_t u;
-    bits child;
+    bitmap child;
     base_stack bs;
     struct {
         STATUS status;
         rid_t rid;
+        rid_t pid;
     };
     comp uf;
-    rid_t pid;
     tick_t tick;
 } routine_t, *routine_p;
 

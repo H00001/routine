@@ -21,10 +21,9 @@ void product1();
 
 void consume1();
 
-int main() {
-
+int main(int argc, char **argv) {
+    n = atoi(argv[1]);
     time_t t = time(NULL);
-    printf("t0 = %d\n", t);
     for (int i = 0; i < n; ++i) {
         create_routine(product);
     }
@@ -34,7 +33,6 @@ int main() {
     wait_all();
 
     time_t t1 = time(NULL);
-    printf("wt = %d\n", t1 - t);
 
     pthread_t *tc = malloc(sizeof(pthread_t));
     for (int i = 0; i < n * 2; i += 2) {
@@ -46,11 +44,8 @@ int main() {
         pthread_join(tc[i], NULL);
     }
 
-
     time_t t2 = time(NULL);
-    printf("wt1 = %d\n", t2 - t1);
-
-
+    printf("n:%d,routine:%lu thread:%lu\n", n, t1 - t, t2 - t1);
 }
 
 void product() {

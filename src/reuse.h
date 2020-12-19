@@ -19,6 +19,6 @@ reuse_p detach(volatile reuse_p *head, volatile reuse_p *tail, reuse_p p);
 
 reuse_p get_top(reuse_p *head);
 
-int foreach(volatile reuse_p head, volatile reuse_p tail, callback c);
+int foreach(volatile reuse_p head, callback c);
 
 reuse_p get(volatile reuse_p *head, volatile reuse_p *tail, callback c);

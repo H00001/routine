@@ -7,33 +7,20 @@
 #include "routine_helper.h"
 #include "stack_collect.h"
 #include "routine_event.h"
+#include "routine_kernel_api.h"
 
 
 extern void stop_routine();
 
-static routine_p create_root_routine();
+static routine_p create_kernel_routine(comp u, routine_p p, data_p params);
 
-static void remove_from_routine_map(rid_t rid);
+static void system_clean(rid_t id, rid_t pid, data_t p, STATUS s);
 
 void remove_0();
 
 void sys_exchange();
 
-routine_p has_routine(rid_t id);
-
-rid_t create_sys_routine(any p, data_p dp, comp u);
-
-reuse_p transfer_oe(routine_p p);
-
-static void set_init_params(data_p p, data_p params);
-
-static void system_clean(rid_t id, rid_t pid, data_t p, STATUS s);
-
-rid_t get_pid(rid_t rid);
-
-rid_t get_curr_rid_();
-
-rid_t get_once_child(rid_t id);
+rid_t create_sys_routine(any p, data_p params, comp u);
 
 #endif
 
