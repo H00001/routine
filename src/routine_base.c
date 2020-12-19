@@ -25,7 +25,7 @@ void remove_0() {
     routine_p p = transfer_eo(s_queues.r_queue_s);
     add_collect(p->bs);
     // Execute user function,When it is complete.
-    p->uf(p->rid, p->pid, p->rax, p->status);
+    p->uf(p->rid, p->pid, p->r.rax, p->status);
 
     ul_rm_routine(p->rid);
 

@@ -31,7 +31,7 @@ typedef struct _base_stack {
     s_size_t size;
 } base_stack;
 
-typedef struct __routine {
+typedef struct _registers {
     volatile code_t esp;
     volatile code_t ebp;
     data_t rdi;
@@ -47,6 +47,10 @@ typedef struct __routine {
     volatile data_t r13;
     volatile data_t r14;
     volatile data_t r15;
+} registers;
+
+typedef struct __routine {
+    registers r;
     reuse_t u;
     bitmap child;
     base_stack bs;

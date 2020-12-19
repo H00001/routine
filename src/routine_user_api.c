@@ -6,7 +6,7 @@
 
 static uroutine UROUTINE_NR[ROUTINE_SUM];
 
-data_t get_consequence(rid_t rid) {
+const data_t get_consequence(rid_t rid) {
     return UROUTINE_NR[rid].consequence;
 }
 
