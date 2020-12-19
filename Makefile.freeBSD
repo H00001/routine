@@ -1,6 +1,6 @@
 CC:=gcc-10 -std=gnu11
 compile:=gcc-10 -c
-base=routine_base.c stack_collect.c reuse.c routine_helper.c routine_user_api.c routine_dfa.c routine_common.c routine_event.c bitmap.c
+base=routine_base.c stack_collect.c reuse.c routine_helper.c routine_user_api.c routine_dfa.c routine_common.c routine_kernel_api.c routine_event.c bitmap.c
 objs=$(base:.c=.o) routine_freebsd.o
 CFLAGES=-arch x86_64 -g -fPIC
 
@@ -37,6 +37,9 @@ routine_freebsd.o:src/routine_freebsd.s
 	$(compile) $(CFLAGES) $^ -o $@
 
 bitmap.o:src/bitmap.c
+	$(compile) $(CFLAGES) $^ -o $@
+
+routine_kernel_api.o:src/routine_kernel_api.c
 	$(compile) $(CFLAGES) $^ -o $@
 
 freebsd: $(objs) main_t.c

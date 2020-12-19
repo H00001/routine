@@ -10,29 +10,29 @@ data_t get_consequence(rid_t rid) {
     return UROUTINE_NR[rid].consequence;
 }
 
-STATUS get_status(rid_t rid) {
+const STATUS get_status(rid_t rid) {
     return UROUTINE_NR[rid].status;
 }
 
 static int user_cond(rid_t rid, enum _EVENT e) {
-    routine_p p;
-    if ((p = has_routine(rid)) == NULL) {
+    if (k_has_routine(rid) == false) {
         return -1;
     }
-    int cur = p->status;
-    int nxt = status_tran(p->status, e);
+    routine_t p = h_get_routine(rid);
+    int cur = p.status;
+    int nxt = status_tran(p.status, e);
     return cur - nxt != 0 ? push_event(rid, cur, nxt) : 0;
 }
 
-int block(rid_t rid) {
+const int block(rid_t rid) {
     return user_cond(rid, USER_BLOCK);
 }
 
-int resume(rid_t rid) {
+const int resume(rid_t rid) {
     return user_cond(rid, USER_CONTINUE);
 }
 
-int sleep(rid_t rid) {
+const int sleep(rid_t rid) {
     return user_cond(rid, USER_CONTINUE);
 }
 
@@ -61,20 +61,20 @@ static void execute_complete(rid_t id, rid_t pid, data_t r, STATUS s) {
     insert_uroutine_map(id, pid, r, s);
 }
 
-rid_t get_prid(rid_t id) {
-    return get_pid(id) < 0 ? UROUTINE_NR[id].pid : get_pid(id);
+const rid_t get_pid(rid_t id) {
+    return k_get_pid(id) < 0 ? UROUTINE_NR[id].pid : k_get_pid(id);
 }
 
-rid_t get_curr_rid() {
-    return get_curr_rid_();
+const rid_t get_rid() {
+    return k_get_rid();
 }
 
-int wait_all() {
+const int wait_all() {
     return wait_rt(-1);
 }
 
-int wait_rt(rid_t id) {
+const int wait_rt(const rid_t id) {
     int i = 0;
-    for (; get_once_child(id) != -1; i++, exchange());
+    for (; k_get_first_child(id) != -1; i++, exchange());
     return i;
 }
