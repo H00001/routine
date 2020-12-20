@@ -10,7 +10,7 @@ void init_stack(routine_p r, data_p stack, int len, any p, any stop) {
     r->r.ebp = (code_t) (stack + len - 1);
 }
 
-routine_p init_routine(comp uf, routine_p p_routine, data_p params) {
+routine_p init_routine(comp uf, routine_p p_routine, data_p params, s_size_t stack_len) {
     routine_p r = malloc(sizeof(routine_t));
     memset(r, 0, sizeof(routine_t));
     set_rid(r);

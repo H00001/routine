@@ -12,7 +12,7 @@
 
 void init_stack(routine_p r, data_p stack, int len, any p, any stop);
 
-routine_p init_routine(comp uf, routine_p p_routine, data_p params);
+routine_p init_routine(comp uf, routine_p p_routine, data_p params, s_size_t stack_len);
 
 static rid_t set_rid(routine_p r);
 

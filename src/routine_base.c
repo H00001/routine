@@ -4,16 +4,16 @@ routine_queues_t s_queues;
 
 rid_t create_sys_routine(any p, data_p params, comp u) {
     if (ul_get_routine(0) == NULL) {
-        create_kernel_routine(system_clean, NULL, NULL);
+        create_kernel_routine(system_clean, NULL, NULL, -1);
     }
-    routine_p r = create_kernel_routine(u, transfer_eo(s_queues.r_queue_s), params);
+    routine_p r = create_kernel_routine(u, transfer_eo(s_queues.r_queue_s), params, STACK_LEN);
     init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p, stop_routine);
     return r->rid;
 }
 
 
-static routine_p create_kernel_routine(comp u, routine_p p, data_p params) {
-    routine_p r = init_routine(u, p, params);
+static routine_p create_kernel_routine(comp u, routine_p p, data_p params, s_size_t stack_len) {
+    routine_p r = init_routine(u, p, params, stack_len);
     insert_tail(&s_queues.r_queue_s, &s_queues.r_queue_e, &r->u);
     return ul_set_routine(r);
 }
