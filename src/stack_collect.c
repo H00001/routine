@@ -4,27 +4,33 @@
 
 #include "stack_collect.h"
 
-static reuse_p coll_s;
-static reuse_p coll_e;
 
-collect_p transfer_co(reuse_p p) {
-    return (collect_p) (p);
-}
+static reuse_p head = NULL;
+static reuse_p tail = NULL;
 
 void release_routine(routine_p b) {
-    collect_p pc = malloc(sizeof(collect_t));
-    pc->bs = b->bs;
-    free(b);
-    insert_head(&coll_s, &coll_e, &pc->link);
+    re_init(b);
+    insert_tail(&head, &tail, &b->u);
 }
 
-data_p acquire_stack0(int len) {
-    return coll_s == NULL ? malloc(len * sizeof(data_t)) : stack_from_collection();
+static void re_init(routine_p r) {
+    if (r->bs.stack != NULL) {
+        free(r->bs.stack);
+        r->bs.stack = NULL;
+    }
+    memset(r, 0, sizeof(registers));
+    r->child = r->child == NULL ? bit_new(ROUTINE_SUM) : bit_reset_0(r->child);
+    memset(&(r->l), 0, sizeof(det));
+};
+
+routine_p acquire_routine(s_size_t len) {
+    routine_p r = head != NULL ? transfer_eo(pop_head(&head, &tail)) : malloc(sizeof(routine_t));
+    memset(r, 0, sizeof(routine_t));
+    if (len > 0) {
+        r->bs.stack = malloc(len * sizeof(data_t));
+        r->bs.size = len;
+    }
+    return r;
 }
 
-static data_p stack_from_collection() {
-    collect_p pc = transfer_co(pop_head(&coll_s, &coll_e));
-    data_p p = pc->bs.stack;
-    free(pc);
-    return p;
-}
+

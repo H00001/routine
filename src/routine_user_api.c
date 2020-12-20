@@ -6,33 +6,33 @@
 
 static uroutine UROUTINE_NR[ROUTINE_SUM];
 
-const data_t get_consequence(rid_t rid) {
+data_t get_consequence(rid_t rid) {
     return UROUTINE_NR[rid].consequence;
 }
 
-const STATUS get_status(rid_t rid) {
-    return UROUTINE_NR[rid].status;
+STATUS get_status(rid_t rid) {
+    return UROUTINE_NR[rid].i.status;
 }
 
-static int user_cond(rid_t rid, enum _EVENT e) {
+static unsigned int user_cond(rid_t rid, enum _EVENT e) {
     if (k_has_routine(rid) == false) {
         return -1;
     }
     routine_t p = h_get_routine(rid);
-    int cur = p.status;
-    int nxt = status_tran(p.status, e);
+    int cur = p.l.inf.status;
+    int nxt = status_tran(p.l.inf.status, e);
     return cur - nxt != 0 ? push_event(rid, cur, nxt) : 0;
 }
 
-const int block(rid_t rid) {
+unsigned int block(rid_t rid) {
     return user_cond(rid, USER_BLOCK);
 }
 
-const int resume(rid_t rid) {
+unsigned int resume(rid_t rid) {
     return user_cond(rid, USER_CONTINUE);
 }
 
-const int sleep(rid_t rid) {
+unsigned int sleep(rid_t rid) {
     return user_cond(rid, USER_CONTINUE);
 }
 
@@ -52,28 +52,28 @@ rid_t create_routine_with_params(any p, int num, ...) {
     return create_sys_routine(p, dp0, execute_complete);
 }
 
-void insert_uroutine_map(rid_t id, rid_t pid, data_t r, STATUS s) {
-    uroutine u1 = {.consequence= r, .status= s, .rid=id, .pid=pid};
-    UROUTINE_NR[id] = u1;
+void insert_uroutine_map(info i, data_t res) {
+    uroutine u1 = {.i= i, .consequence=res};
+    UROUTINE_NR[i.rid] = u1;
 }
 
-static void execute_complete(rid_t id, rid_t pid, data_t r, STATUS s) {
-    insert_uroutine_map(id, pid, r, s);
+static void execute_complete(info i, data_t r) {
+    insert_uroutine_map(i, r);
 }
 
-const rid_t get_pid(rid_t id) {
-    return k_get_pid(id) < 0 ? UROUTINE_NR[id].pid : k_get_pid(id);
+rid_t get_pid(rid_t id) {
+    return k_get_pid(id) < 0 ? UROUTINE_NR[id].i.pid : k_get_pid(id);
 }
 
-const rid_t get_rid() {
+rid_t get_rid() {
     return k_get_rid();
 }
 
-const int wait_all() {
+int wait_all() {
     return wait_rt(-1);
 }
 
-const int wait_rt(const rid_t id) {
+int wait_rt(const rid_t id) {
     int i = 0;
     for (; k_get_first_child(id) != -1; i++, exchange());
     return i;

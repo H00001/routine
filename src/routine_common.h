@@ -23,8 +23,12 @@ typedef int rid_t;
 typedef unsigned int s_size_t;
 typedef unsigned int tick_t;
 
-typedef void(*comp)(rid_t id, rid_t pid, data_t r, STATUS s);
 
+typedef struct r_into {
+    STATUS status;
+    rid_t rid;
+    rid_t pid;
+} info;
 
 typedef struct _base_stack {
     data_p stack;
@@ -49,18 +53,21 @@ typedef struct _registers {
     volatile data_t r15;
 } registers;
 
+
+typedef void(*comp)(info i, data_t r);
+
+typedef struct _det {
+    info inf;
+    comp uf;
+    tick_t tick;
+} det;
+
 typedef struct __routine {
     registers r;
     reuse_t u;
     bitmap child;
     base_stack bs;
-    struct {
-        STATUS status;
-        rid_t rid;
-        rid_t pid;
-    };
-    comp uf;
-    tick_t tick;
+    det l;
 } routine_t, *routine_p;
 
 typedef struct _queues {
@@ -89,7 +96,7 @@ typedef struct _queues {
 typedef enum _bool {
     true, false
 }
-bool;
+        bool;
 
 typedef void(*EvenFn)(routine_queues_p, routine_p curr);
 

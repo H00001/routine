@@ -7,32 +7,32 @@ const bool k_has_routine(rid_t id) {
     return ROUTINE_NR[id] != NULL ? true : false;
 }
 
-const rid_t k_get_pid(rid_t rid) {
-    return ROUTINE_NR[rid] == NULL ? -1 : ROUTINE_NR[rid]->pid;
+rid_t k_get_pid(rid_t rid) {
+    return ROUTINE_NR[rid] == NULL ? -1 : ROUTINE_NR[rid]->l.inf.pid;
 }
 
-const rid_t k_get_rid() {
+rid_t k_get_rid() {
     return current_rid;
 }
 
-const STATUS k_get_status(rid_t id) {
-    return ROUTINE_NR[id]->status;
+STATUS k_get_status(rid_t id) {
+    return ROUTINE_NR[id]->l.inf.status;
 }
 
-const routine_t h_get_routine(rid_t id) {
+routine_t h_get_routine(rid_t id) {
     return *ROUTINE_NR[id];
 }
 
-const bool h_update_status(rid_t id, STATUS status) {
-    ROUTINE_NR[id]->status = status;
+bool h_update_status(rid_t id, STATUS status) {
+    ROUTINE_NR[id]->l.inf.status = status;
     return true;
 }
 
-const routine_p ul_set_routine(routine_p r) {
-    return ROUTINE_NR[r->rid] = r;
+routine_p ul_set_routine(routine_p r) {
+    return ROUTINE_NR[r->l.inf.rid] = r;
 }
 
-const routine_p ul_get_routine(rid_t id) {
+routine_p ul_get_routine(rid_t id) {
     return ROUTINE_NR[id];
 }
 

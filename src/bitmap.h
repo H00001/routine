@@ -13,7 +13,8 @@
 
 typedef unsigned long bit_size;
 
-typedef struct _Bits {
+
+typedef struct Bits {
     unsigned long *bits;
     bit_size length;
     bit_size _length;
@@ -29,3 +30,5 @@ unsigned int bit_length(bitmap bit);
 void bit_set(bitmap bit, unsigned int pos, unsigned char value);
 
 char bit_get(bitmap bit, unsigned int pos);
+
+bitmap bit_reset_0(bitmap bit);

@@ -7,17 +7,10 @@
 
 #include "routine_common.h"
 
-typedef struct _collect {
-    reuse_t link;
-    base_stack bs;
-} collect_t, *collect_p;
-
-collect_p transfer_co(reuse_p p);
-
 void release_routine(routine_p b);
 
-static data_p stack_from_collection();
+routine_p acquire_routine(s_size_t len);
 
-data_p acquire_stack0(int len);
+static void re_init(routine_p r);
 
 #endif //ROUTINE_STACK_COLLECT_H

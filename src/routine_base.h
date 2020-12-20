@@ -1,5 +1,5 @@
-#ifndef __ROUTINE_H__
-#define __ROUTINE_H__
+#ifndef __ROUTINE_BASE_H__
+#define __ROUTINE_BASE_H__
 
 #include <stdlib.h>
 #include <string.h>
@@ -12,7 +12,7 @@
 
 extern void stop_routine();
 
-static routine_p create_kernel_routine(comp u, routine_p p, data_p params);
+static routine_p create_kernel_routine(comp u, routine_p p, data_p params, s_size_t stack_len);
 
 static void system_clean(rid_t id, rid_t pid, data_t p, STATUS s);
 
