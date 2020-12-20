@@ -23,8 +23,12 @@ typedef int rid_t;
 typedef unsigned int s_size_t;
 typedef unsigned int tick_t;
 
-typedef void(*comp)(rid_t id, rid_t pid, data_t r, STATUS s);
 
+typedef struct r_into {
+    STATUS status;
+    rid_t rid;
+    rid_t pid;
+} info;
 
 typedef struct _base_stack {
     data_p stack;
@@ -49,12 +53,11 @@ typedef struct _registers {
     volatile data_t r15;
 } registers;
 
+
+typedef void(*comp)(info i, data_t r);
+
 typedef struct _det {
-    struct {
-        STATUS status;
-        rid_t rid;
-        rid_t pid;
-    };
+    info inf;
     comp uf;
     tick_t tick;
 } det;

@@ -14,9 +14,9 @@ routine_p init_routine(comp uf, routine_p p_routine, data_p params, s_size_t sta
     set_rid(r);
     r->child = bit_new(ROUTINE_SUM);
     r->l.uf = uf;
-    r->l.pid = p_routine == NULL ? -1 : p_routine->l.rid;
+    r->l.inf.pid = p_routine == NULL ? -1 : p_routine->l.inf.rid;
     if (p_routine != NULL)
-        bit_set(p_routine->child, r->l.rid, true);
+        bit_set(p_routine->child, r->l.inf.rid, true);
     if (params != NULL)
         set_init_params(&r->r.rdi, params);
     return r;
@@ -24,7 +24,7 @@ routine_p init_routine(comp uf, routine_p p_routine, data_p params, s_size_t sta
 
 static rid_t set_rid(routine_p r) {
     static int curr_pid = 0;
-    return r->l.rid = curr_pid++;
+    return r->l.inf.rid = curr_pid++;
 }
 
 static void set_init_params(data_p p, data_p params) {

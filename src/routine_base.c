@@ -8,7 +8,7 @@ rid_t create_sys_routine(any p, data_p params, comp u) {
     }
     routine_p r = create_kernel_routine(u, transfer_eo(s_queues.r_queue_s), params, STACK_LEN);
     init_stack(r, p, stop_routine);
-    return r->l.rid;
+    return r->l.inf.rid;
 }
 
 
@@ -25,16 +25,15 @@ void remove_0() {
     routine_p p = transfer_eo(pop_head(&s_queues.r_queue_s, &s_queues.r_queue_e));
 
     // Execute user function,When it is complete.
-    p->l.uf(p->l.rid, p->l.pid, p->r.rax, p->l.status);
+    p->l.uf(p->l.inf, p->r.rax);
 
-    ul_rm_routine(p->l.rid);
-
+    ul_rm_routine(p->l.inf.rid);
     release_routine(p);
 
     foreach(s_queues.s_queue_s, ROUTINE_SLEEP);
     for (p_event e = NULL; (e = fetch_event()) != NULL; e->even(&s_queues, ul_get_routine(e->rid)));
 
-    ul_set_current_rid(transfer_eo(get_top(&s_queues.r_queue_s))->l.rid);
+    ul_set_current_rid(transfer_eo(get_top(&s_queues.r_queue_s))->l.inf.rid);
 }
 
 void sys_exchange() {
@@ -43,8 +42,8 @@ void sys_exchange() {
     }
     insert_tail(&s_queues.r_queue_s, &s_queues.r_queue_e, pop_head(&s_queues.r_queue_s, &s_queues.r_queue_e));
     routine_p r = transfer_eo(get_top(&s_queues.r_queue_s));
-    r->l.status = R;
-    ul_set_current_rid(r->l.rid);
+    r->l.inf.status = R;
+    ul_set_current_rid(r->l.inf.rid);
 }
 
 rid_t k_get_first_child(rid_t id) {
@@ -53,10 +52,10 @@ rid_t k_get_first_child(rid_t id) {
     }
     reuse_p rp;
     int find_child(reuse_p v) {
-        return transfer_eo(v)->l.pid == k_get_rid() ? 1 : 0;
+        return transfer_eo(v)->l.inf.pid == k_get_rid() ? 1 : 0;
     }
     if ((rp = get(&s_queues.r_queue_s, &s_queues.r_queue_e, find_child)) != NULL) {
-        return transfer_eo(rp)->l.rid;
+        return transfer_eo(rp)->l.inf.rid;
     }
     return -1;
 }

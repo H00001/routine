@@ -17,14 +17,14 @@ int ROUTINE_SLEEP(reuse_p r) {
 }
 
 void _ALL_TO_R(routine_queues_p q, routine_p curr) {
-    curr->l.status = R;
+    curr->l.inf.status = R;
     insert_tail(&q->r_queue_s, &q->r_queue_e, &curr->u);
     detach(&q->ub_queue_s, &q->ub_queue_e, &curr->u);
 }
 
 void R_TO_UB(routine_queues_p q, routine_p curr) {
     detach(&q->r_queue_s, &q->r_queue_e, &curr->u);
-    curr->l.status = UB;
+    curr->l.inf.status = UB;
     insert_tail(&q->ub_queue_s, &q->ub_queue_e, &curr->u);
 }
 

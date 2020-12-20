@@ -19,8 +19,8 @@ static int user_cond(rid_t rid, enum _EVENT e) {
         return -1;
     }
     routine_t p = h_get_routine(rid);
-    int cur = p.l.status;
-    int nxt = status_tran(p.l.status, e);
+    int cur = p.l.inf.status;
+    int nxt = status_tran(p.l.inf.status, e);
     return cur - nxt != 0 ? push_event(rid, cur, nxt) : 0;
 }
 

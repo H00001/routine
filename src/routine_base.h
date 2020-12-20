@@ -1,5 +1,5 @@
-#ifndef __ROUTINE_H__
-#define __ROUTINE_H__
+#ifndef __ROUTINE_BASE_H__
+#define __ROUTINE_BASE_H__
 
 #include <stdlib.h>
 #include <string.h>
