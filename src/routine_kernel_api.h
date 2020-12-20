@@ -11,7 +11,7 @@ const rid_t k_get_pid(rid_t rid);
 
 const rid_t k_get_rid();
 
-const rid_t k_get_first_child(rid_t id);
+rid_t k_get_first_child(rid_t id);
 
 const bool k_has_routine(rid_t id);
 

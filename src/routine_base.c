@@ -45,7 +45,7 @@ void sys_exchange() {
     ul_set_current_rid(r->rid);
 }
 
-const rid_t k_get_first_child(rid_t id) {
+rid_t k_get_first_child(rid_t id) {
     if (id >= 1) {
         return ul_get_routine(id) == NULL ? -1 : id;
     }
