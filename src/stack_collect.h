@@ -14,7 +14,7 @@ typedef struct _collect {
 
 collect_p transfer_co(reuse_p p);
 
-void add_collect(base_stack b);
+void release_routine(routine_p b);
 
 static data_p stack_from_collection();
 

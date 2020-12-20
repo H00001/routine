@@ -6,8 +6,8 @@ void init_stack(routine_p r, data_p stack, int len, any p, any stop) {
     r->bs.size = len;
     stack[len - 1] = (code_t) stop;
     stack[len - 2] = (code_t) p;
-    r->esp = (code_t) (stack + len - 2);
-    r->ebp = (code_t) (stack + len - 1);
+    r->r.esp = (code_t) (stack + len - 2);
+    r->r.ebp = (code_t) (stack + len - 1);
 }
 
 routine_p init_routine(comp uf, routine_p p_routine, data_p params) {
@@ -20,7 +20,7 @@ routine_p init_routine(comp uf, routine_p p_routine, data_p params) {
     if (p_routine != NULL)
         bit_set(p_routine->child, r->rid, true);
     if (params != NULL)
-        set_init_params(&r->rdi, params);
+        set_init_params(&r->r.rdi, params);
     return r;
 }
 
