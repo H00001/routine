@@ -11,9 +11,10 @@ collect_p transfer_co(reuse_p p) {
     return (collect_p) (p);
 }
 
-void add_collect(base_stack b) {
+void release_routine(routine_p b) {
     collect_p pc = malloc(sizeof(collect_t));
-    pc->bs = b;
+    pc->bs = b->bs;
+    free(b);
     insert_head(&coll_s, &coll_e, &pc->link);
 }
 
