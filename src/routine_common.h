@@ -49,11 +49,7 @@ typedef struct _registers {
     volatile data_t r15;
 } registers;
 
-typedef struct __routine {
-    registers r;
-    reuse_t u;
-    bitmap child;
-    base_stack bs;
+typedef struct _det {
     struct {
         STATUS status;
         rid_t rid;
@@ -61,6 +57,14 @@ typedef struct __routine {
     };
     comp uf;
     tick_t tick;
+} det;
+
+typedef struct __routine {
+    registers r;
+    reuse_t u;
+    bitmap child;
+    base_stack bs;
+    det l;
 } routine_t, *routine_p;
 
 typedef struct _queues {
@@ -89,7 +93,7 @@ typedef struct _queues {
 typedef enum _bool {
     true, false
 }
-bool;
+        bool;
 
 typedef void(*EvenFn)(routine_queues_p, routine_p curr);
 

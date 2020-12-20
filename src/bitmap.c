@@ -6,12 +6,12 @@
 
 
 bitmap bit_new(bit_size length) {
-    bitmap new_bits = malloc(sizeof(struct _Bits));
+    bitmap new_bits = malloc(sizeof(struct Bits));
     if (new_bits == NULL)
         return NULL;
 
-    new_bits->_length = (length >> 6) + 1;
-    new_bits->bits = malloc(sizeof(char) * new_bits->_length);
+    new_bits->_length = (length >> 6u) + 1;
+    new_bits->bits = malloc(sizeof(bit_size) * new_bits->_length);
     memset(new_bits->bits, 0, new_bits->_length);
     new_bits->length = length;
     return new_bits;
@@ -27,14 +27,19 @@ unsigned int bit_length(bitmap bit) {
 }
 
 void bit_set(bitmap bit, unsigned int pos, unsigned char value) {
-    unsigned long mask = 1 << (pos & 63);
-    bit->bits[(pos >> 6)] = value ? bit->bits[(pos >> 6)] | mask :
-                            bit->bits[(pos >> 6)] & ~mask;
+    bit_size mask = 1u << (pos & 63u);
+    bit->bits[(pos >> 6u)] = value ? bit->bits[(pos >> 6u)] | mask :
+                             bit->bits[(pos >> 6u)] & ~mask;
 }
 
 char bit_get(bitmap bit, unsigned int pos) {
-    unsigned long mask = 1 << (pos & 63);
-    return (mask & bit->bits[(pos >> 6)]) > 0 ? 1 : 0;
+    bit_size mask = 1u << (pos & 63u);
+    return (mask & bit->bits[(pos >> 6u)]) > 0 ? 1 : 0;
+}
+
+bitmap bit_reset_0(bitmap bit) {
+    memset(bit->bits, 0, bit->_length * sizeof(bit_size));
+    return bit;
 }
 
 
@@ -43,9 +48,10 @@ unsigned long get_zero(bitmap b) {
         if (~(b->bits[i]) > 0) {
             for (int j = 0; j < 64; j++) {
                 if (!bit_get(b, j)) {
-                    return (i << 6) + j;
+                    return (i << 6u) + j;
                 }
             }
         }
     }
+    return -1;
 }
