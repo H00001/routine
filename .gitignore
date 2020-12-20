@@ -10,3 +10,6 @@ checker
 test/libroutine.a
 bitmap
 libroutine.a
+freebad*
+build
+*.o

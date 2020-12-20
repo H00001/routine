@@ -3,7 +3,7 @@
 static routine_p ROUTINE_NR[ROUTINE_SUM];
 static rid_t current_rid = 0;
 
-const bool k_has_routine(rid_t id) {
+bool k_has_routine(rid_t id) {
     return ROUTINE_NR[id] != NULL ? true : false;
 }
 

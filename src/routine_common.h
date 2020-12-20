@@ -56,13 +56,13 @@ typedef struct _registers {
 
 typedef void(*comp)(info i, data_t r);
 
-typedef struct _det {
+typedef struct det {
     info inf;
     comp uf;
     tick_t tick;
 } det;
 
-typedef struct __routine {
+typedef struct routine {
     registers r;
     reuse_t u;
     bitmap child;
@@ -70,33 +70,18 @@ typedef struct __routine {
     det l;
 } routine_t, *routine_p;
 
-typedef struct _queues {
-    struct {
-        reuse_t *r_queue_s;
-        reuse_t *r_queue_e;
-    };
-    struct {
-        reuse_t *ub_queue_s;
-        reuse_t *ub_queue_e;
-    };
-    struct {
-        reuse_t *w_queue_s;
-        reuse_t *w_queue_e;
-    };
-    struct {
-        reuse_t *s_queue_s;
-        reuse_t *s_queue_e;
-    };
-    struct {
-        reuse_t *t_queue_s;
-        reuse_t *t_queue_e;
-    };
+
+typedef struct queues {
+    reuse_t r_queue;
+    reuse_t ub_queue;
+    reuse_t w_queue;
+    reuse_t s_queue;
+    reuse_t t_queue;
 } routine_queues_t, *routine_queues_p;
 
-typedef enum _bool {
+typedef enum bool {
     true, false
-}
-        bool;
+} bool;
 
 typedef void(*EvenFn)(routine_queues_p, routine_p curr);
 

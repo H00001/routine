@@ -10,7 +10,7 @@
 static reuse_p event_queue_h = NULL;
 static reuse_p event_queue_r = NULL;
 
-typedef struct _user_event {
+typedef struct user_event {
     reuse_t u;
     EvenFn even;
     rid_t rid;

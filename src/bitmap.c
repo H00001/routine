@@ -1,3 +1,4 @@
+#include <ntsid.h>
 //
 // Created by dos DRTT on 11/18/20.
 //
@@ -17,12 +18,12 @@ bitmap bit_new(bit_size length) {
     return new_bits;
 }
 
-void bit_destroy(bitmap bit) {
+__unused void bit_destroy(bitmap bit) {
     free(bit->bits);
     free(bit);
 }
 
-unsigned int bit_length(bitmap bit) {
+__unused unsigned int bit_length(bitmap bit) {
     return bit->length;
 }
 
@@ -43,7 +44,7 @@ bitmap bit_reset_0(bitmap bit) {
 }
 
 
-unsigned long get_zero(bitmap b) {
+__unused unsigned long get_zero(bitmap b) {
     for (unsigned long i = 0; i < b->_length; i++) {
         if (~(b->bits[i]) > 0) {
             for (int j = 0; j < 64; j++) {

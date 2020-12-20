@@ -13,7 +13,7 @@ rid_t k_get_rid();
 
 rid_t k_get_first_child(rid_t id);
 
-const bool k_has_routine(rid_t id);
+bool k_has_routine(rid_t id);
 
 STATUS k_get_status(rid_t id);
 
