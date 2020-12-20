@@ -7,7 +7,7 @@ rid_t create_sys_routine(any p, data_p params, comp u) {
         create_kernel_routine(system_clean, NULL, NULL, -1);
     }
     routine_p r = create_kernel_routine(u, transfer_eo(s_queues.r_queue_s), params, STACK_LEN);
-    init_stack(r, acquire_stack0(STACK_LEN), STACK_LEN, p, stop_routine);
+    init_stack(r, p, stop_routine);
     return r->rid;
 }
 
