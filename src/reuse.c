@@ -9,7 +9,7 @@ static int init(reuse_p *head, reuse_p *tail, reuse_p p) {
     return 0;
 }
 
-__unused static int init_0(reuse_p r, reuse_p p) {
+static int init_0(reuse_p r, reuse_p p) {
     return init(&r->prev, &r->next, p);
 }
 
@@ -24,7 +24,7 @@ void insert_head(reuse_p *head, reuse_p *tail, reuse_p p) {
     s->prev = p;
 }
 
-__unused void insert_head_0(reuse_p r, reuse_p p) {
+void insert_head_0(reuse_p r, reuse_p p) {
     insert_head(&r->prev, &r->next, p);
 }
 

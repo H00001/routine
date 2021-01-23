@@ -23,9 +23,9 @@ typedef struct Bits {
 
 bitmap bit_new(bit_size length);
 
-__unused void bit_destroy(bitmap bit);
+void bit_destroy(bitmap bit);
 
-__unused unsigned int bit_length(bitmap bit);
+unsigned int bit_length(bitmap bit);
 
 void bit_set(bitmap bit, unsigned int pos, unsigned char value);
 

@@ -1,22 +1,55 @@
-CC=gcc -std=gnu11
-base=src/routine_base.c src/stack_collect.c src/util/reuse.c src/routine_helper.c src/routine_user_api.c src/routine_dfa.c src/routine_common.c src/routine_event.c
+CC:=gcc -std=gnu11
+compile:=gcc -c
+base=routine_base.c stack_collect.c reuse.c routine_helper.c routine_user_api.c routine_dfa.c routine_common.c routine_kernel_api.c routine_event.c bitmap.c
+objs=$(base:.c=.o) routine_linux.o
+CFLAGES=-g -fPIC
 
-linux: $(base) src/routine_freebsd.s main_t.c
-	$(CC) $^ -o $@ 
+lib:$(objs)
+	ar crv libroutine.a $(objs)
+	mv *.o ./build
+	mv libroutine.a ./build
+
+routine_base.o:src/routine_base.c
+	$(compile) $(CFLAGES) $^ -o $@
+
+reuse.o:src/reuse.c
+	$(compile) $(CFLAGES) $^ -o $@
+
+stack_collect.o:src/stack_collect.c
+	$(compile) $(CFLAGES) $< -o $@
+
+routine_helper.o:src/routine_helper.c
+	$(compile) $(CFLAGES) $< -o $@
+
+routine_dfa.o:src/routine_dfa.c
+	$(compile) $(CFLAGES) $^ -o $@
+
+routine_common.o:src/routine_common.c
+	$(compile) $(CFLAGES) $^ -o $@
+
+routine_event.o:src/routine_event.c
+	$(compile) $(CFLAGES) $^ -o $@
+
+routine_user_api.o:src/routine_user_api.c
+	$(compile) $(CFLAGES) $^ -o $@
+
+routine_linux.o:src/routine_linux.s
+	$(compile) $(CFLAGES) $^ -o $@
+
+bitmap.o:src/bitmap.c
+	$(compile) $(CFLAGES) $^ -o $@
+
+routine_kernel_api.o:src/routine_kernel_api.c
+	$(compile) $(CFLAGES) $^ -o $@
+
+linux: $(objs) main_t.c
+	$(CC) $^ -o $@
+	rm -rf *.o
 
 check:
-	make checker
 
 distcheck:
-	make bitmap
 
-lib:
-	mkdir build
-	gcc -c src
-
-
-include ./test/makefile
 .PHONY:clean
 clean:
-	rm *.o freebsd linux
-
+	rm *.o freebsd linux checker
