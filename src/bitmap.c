@@ -2,7 +2,7 @@
 // Created by dos DRTT on 11/18/20.
 //
 
-#include "bitmap.h"
+#include "./include/bitmap.h"
 
 
 bitmap bit_new(bit_size length) {

@@ -2,7 +2,7 @@
 // Created by dos DRTT on 11/13/20.
 //
 
-#include "routine_dfa.h"
+#include "./include/routine_dfa.h"
 
 static STATUS CW(EVENT e) {
     switch (e) {

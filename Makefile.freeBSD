@@ -1,8 +1,8 @@
-CC:=gcc-10 -std=gnu11
-compile:=gcc-10 -c
+CC:=gcc -std=gnu11
+compile:=gcc -c
 base=routine_base.c stack_collect.c reuse.c routine_helper.c routine_user_api.c routine_dfa.c routine_common.c routine_kernel_api.c routine_event.c bitmap.c
 objs=$(base:.c=.o) routine_freebsd.o
-CFLAGES=-arch x86_64 -g -fPIC
+CFLAGES=-arch x86_64 -g -fPIC -O0 -Wall
 
 lib:$(objs)
 	ar crv libroutine.a $(objs)

@@ -2,7 +2,7 @@
 // Created by dos DRTT on 11/12/20.
 //
 
-#include "routine_user_api.h"
+#include "./include/routine_user_api.h"
 
 static uroutine UROUTINE_NR[ROUTINE_SUM];
 
@@ -40,12 +40,20 @@ rid_t create_routine(any p) {
     return create_sys_routine(p, NULL, execute_complete);
 }
 
-rid_t create_routine_with_params(any p, int num, ...) {
+/**
+ * @brief Create a routine with params object
+ * 
+ * @param p function address
+ * @param params_sum the sum of params 
+ * @param ... variable parameters
+ * @return rid_t routine id
+ */
+rid_t create_routine_with_params(any p, int params_sum, ...) {
     data_p dp0 = malloc(6 * sizeof(data_t));
     data_p dp = dp0;
     va_list p_list;
-    va_start(p_list, num);
-    for (int i = 0; i < num; i++, dp++) {
+    va_start(p_list, params_sum);
+    for (int i = 0; i < params_sum; i++, dp++) {
         (*dp) = va_arg(p_list, data_t);
     }
     va_end(p_list);

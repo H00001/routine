@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "reuse.h": "c",
+        "routine_base.h": "c",
+        "routine_dfa.h": "c",
+        "routine_event.h": "c",
+        "routine_helper.h": "c",
+        "stack_collect.h": "c"
+    }
+}

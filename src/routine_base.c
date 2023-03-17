@@ -1,4 +1,4 @@
-#include "routine_base.h"
+#include "./include/routine_base.h"
 
 routine_queues_t s_queues;
 
@@ -46,14 +46,16 @@ void sys_exchange() {
     ul_set_current_rid(r->l.inf.rid);
 }
 
+    int find_child(reuse_p v) {
+        return transfer_eo(v)->l.inf.pid == k_get_rid() ? 1 : 0;
+    }
+    
 rid_t k_get_first_child(rid_t id) {
     if (id >= 1) {
         return ul_get_routine(id) == NULL ? -1 : id;
     }
     reuse_p rp;
-    int find_child(reuse_p v) {
-        return transfer_eo(v)->l.inf.pid == k_get_rid() ? 1 : 0;
-    }
+
     if ((rp = get_0(&s_queues.r_queue, find_child)) != NULL) {
         return transfer_eo(rp)->l.inf.rid;
     }
